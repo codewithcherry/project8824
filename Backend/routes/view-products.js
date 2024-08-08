@@ -1,0 +1,1 @@
+// this is the routes page for the listing the products of shop app
