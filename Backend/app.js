@@ -10,9 +10,11 @@ const app=express();
 
 const addProductsrouter=require('./routes/add-product.js');
 const viewProductsrouter=require("./routes/view-products.js")
+const homerouter=require('./routes/home.js');
 
 app.use(addProductsrouter);
 app.use(viewProductsrouter);
+app.use(homerouter);
 
 
 app.use((req,res,next)=>{
