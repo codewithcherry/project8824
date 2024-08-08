@@ -17,7 +17,7 @@ app.use(viewProductsrouter);
 
 app.use((req,res,next)=>{
     console.log("server just started");
-    res.send("<h1>Welcome to Express server");
+    res.sendFile(path.join(rootdir,'views','404.html'));
 })
 
 app.listen(3000);
