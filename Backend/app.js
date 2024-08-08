@@ -10,6 +10,11 @@ app.get("/add-product",(req,res,next)=>{
     res.send("<h1>This is the add product page");
 })
 
+app.use('/view-products',(req,res,next)=>{
+    console.log("view products page");
+    res.status("200").send("<h1>This the products displayed page");
+})
+
 
 app.use((req,res,next)=>{
     console.log("server just started");
