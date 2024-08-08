@@ -9,13 +9,10 @@ const rootdir=require('../Backend/utils/utilpath')
 const app=express();
 
 const addProductsrouter=require('./routes/add-product.js');
+const viewProductsrouter=require("./routes/view-products.js")
 
 app.use(addProductsrouter);
-
-app.use('/view-products',(req,res,next)=>{
-    console.log("view products page");
-    res.status("200").sendfile(rootdir,'views','view-products.html');
-})
+app.use(viewProductsrouter);
 
 
 app.use((req,res,next)=>{
