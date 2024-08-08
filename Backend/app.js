@@ -2,17 +2,19 @@
 
 const express=require('express');
 
+const path=require('path');
+
+const rootdir=require('../Backend/utils/utilpath')
+
 const app=express();
 
+const addProductsrouter=require('./routes/add-product.js');
 
-app.get("/add-product",(req,res,next)=>{
-    console.log("add product page rendered");
-    res.send("<h1>This is the add product page");
-})
+app.use(addProductsrouter);
 
 app.use('/view-products',(req,res,next)=>{
     console.log("view products page");
-    res.status("200").send("<h1>This the products displayed page");
+    res.status("200").sendfile(rootdir,'views','view-products.html');
 })
 
 
