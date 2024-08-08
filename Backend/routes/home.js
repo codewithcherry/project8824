@@ -1,0 +1,1 @@
+// this route is for home page of the website
