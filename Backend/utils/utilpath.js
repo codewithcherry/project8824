@@ -1,0 +1,1 @@
+// this is the util path page for setting global access path for the root file app.js
