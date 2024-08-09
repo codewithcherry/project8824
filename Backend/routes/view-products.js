@@ -9,7 +9,7 @@ const rootdir=require("../utils/utilpath");
 
 router.get("/view-products",(req,res,next)=>{
     console.log("view products page rendered");
-    res.sendfile(path.join(rootdir,"views",'view-products.html'));
+    res.sendFile(path.join(rootdir,"views",'view-products.html'));
 })
 
 module.exports=router
