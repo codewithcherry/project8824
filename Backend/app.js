@@ -6,7 +6,11 @@ const path=require('path');
 
 const rootdir=require('../Backend/utils/utilpath')
 
+const bodyParser=require("body-parser");
+
 const app=express();
+
+app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(express.static(path.join(__dirname,"public")));
 
