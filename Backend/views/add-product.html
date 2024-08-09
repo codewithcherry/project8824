@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add products page</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="addproduct.css">
 </head>
 <body>
     <div class="header-section">
@@ -32,6 +33,33 @@
                 </div>
             </div>
         </nav>
+    </div>
+    <div class="main-container">
+        <div class="form-title-container">
+            <h1 class="form-title">Add Product Details</h1>
+        </div>
+        <div class="form-container">
+            <form action="/view-products" method="post" class="form">
+                <div class="form-item">
+                    <label for="title">Product Title</label>
+                    <input type="text" id="title" name="title" placeholder="enter product title">
+                </div>
+
+                <div class="form-item">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" placeholder="type short description..">
+                </div>
+
+                <div class="form-item">
+                    <label for="price">Price</label>
+                    <input type="number" id="price" name="price">
+                </div>
+
+                <div class="form-item">
+                    <button type="submit" class="submit-button">Submit</button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
