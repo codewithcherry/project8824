@@ -8,6 +8,8 @@ const rootdir=require('../Backend/utils/utilpath')
 
 const app=express();
 
+app.use(express.static(path.join(__dirname,"public")));
+
 const addProductsrouter=require('./routes/add-product.js');
 const viewProductsrouter=require("./routes/view-products.js")
 const homerouter=require('./routes/home.js');
