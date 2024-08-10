@@ -12,5 +12,10 @@ router.get("/view-products",(req,res,next)=>{
     res.sendFile(path.join(rootdir,"views",'view-products.html'));
 })
 
+router.post("/view-products",(req,res,next)=>{
+    console.log(req.body);
+    res.redirect("/");
+})
+
 module.exports=router
 
