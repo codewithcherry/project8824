@@ -28,7 +28,7 @@ app.use(homerouter);
 
 app.use((req,res,next)=>{
     console.log("server just started");
-    res.sendFile(path.join(rootdir,'views','404.html'));
+    res.render('404',{pagetitle:"Not responding | 404 Error"});
 })
 
 app.listen(3000);
