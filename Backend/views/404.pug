@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= pagetitle
+    link(rel="stylesheet" href="404.css")
+    link(rel="stylesheet" href="main.css")
+  body
+    .header-section
+      nav.navbar
+        .nav-container
+          .title My shop app
+          .list-conatiner
+            ul.list
+              li.list-item
+                a(href="/") Home
+              li.list-item
+                a(href="/add-product") Add Products
+              li.list-item
+                a(href="/view-products") Products
+    .error-container
+      h1.error-title 404 Error
+      p Requested page not responding. Try again later.
