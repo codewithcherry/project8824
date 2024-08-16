@@ -11,7 +11,7 @@ const products=[]
 
 router.get("/view-products",(req,res,next)=>{
     console.log("view products page rendered");
-    res.render('view-products',{pagetitle:"View Products"});
+    res.render('view-products',{pagetitle:"View Products",prods:products});
 })
 
 router.post("/view-products",(req,res,next)=>{

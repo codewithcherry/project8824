@@ -18,3 +18,16 @@ html(lang="en")
                 a(href="/add-product") Add Products
               li.list-item
                 a(href="/view-products") Products
+    .main-section
+      h1 products
+      .products-container
+        if prods.length == 0
+          p No products to display 
+        else
+          each product in prods
+            .product
+              img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
+              h2.product-title= product.title
+              p.product-des= product.description 
+              h3.price= product.price
+              button.cart-button add to cart
