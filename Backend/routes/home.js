@@ -13,7 +13,7 @@ const viewproducts=require("../routes/view-products.js");
 router.get("/",(req,res,next)=>{
     console.log("Home page");
     console.log(viewproducts.productsList);  
-    res.sendFile(path.join(rootdir,'views','home.html'));
+    res.render('home',{pagetitle:"Home"});
 })
 
 module.exports=router;

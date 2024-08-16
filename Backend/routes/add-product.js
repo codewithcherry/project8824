@@ -8,7 +8,7 @@ const router=express.Router();
 
 router.get("/add-product",(req,res,next)=>{
     console.log("add product page rendered");
-    res.sendFile(path.join(rootdir,"views","add-product.html"));
+    res.render("add-product",{pagetitle:"Add Products"});
 })
 
 
