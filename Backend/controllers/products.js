@@ -8,7 +8,6 @@ const products=[]
 
 exports.postProductController=(req,res,next)=>{
     products.push(req.body);
-    console.log(products);
     res.redirect("/view-products");
 }
 

@@ -6,14 +6,8 @@ const path=require('path')
 
 const router=express.Router();
 
-const rootdir=require('../utils/utilpath');
+const homePageController=require("../controllers/homeController")
 
-const viewproducts=require("../routes/view-products.js");
-
-router.get("/",(req,res,next)=>{
-    console.log("Home page");
-    console.log(viewproducts.productsList);  
-    res.render('home',{pagetitle:"Home"});
-})
+router.get("/",homePageController.homeController);
 
 module.exports=router;
