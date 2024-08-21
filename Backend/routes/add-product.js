@@ -4,12 +4,11 @@ const path=require('path');
 
 const rootdir = require('../utils/utilpath');
 
+const productsController=require('../controllers/products')
+
 const router=express.Router();
 
-router.get("/add-product",(req,res,next)=>{
-    console.log("add product page rendered");
-    res.render("add-product",{pagetitle:"Add Products"});
-})
+router.get("/add-product",productsController.addProductController);
 
 
 module.exports=router
