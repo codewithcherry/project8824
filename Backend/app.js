@@ -22,7 +22,7 @@ const viewProductsrouter=require("./routes/view-products.js")
 const homerouter=require('./routes/home.js');
 
 app.use(addProductsrouter);
-app.use(viewProductsrouter.route);
+app.use(viewProductsrouter);
 app.use(homerouter);
 
 
