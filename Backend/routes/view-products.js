@@ -5,20 +5,15 @@ const path=require("path")
 
 const router=express.Router();
 
+const productsController=require("../controllers/products")
+
 const rootdir=require("../utils/utilpath");
 
-const products=[]
 
-router.get("/view-products",(req,res,next)=>{
-    console.log("view products page rendered");
-    res.render('view-products',{pagetitle:"View Products",prods:products});
-})
 
-router.post("/view-products",(req,res,next)=>{
-    products.push(req.body);
-    console.log(products);
-    res.redirect("/");
-})
+router.get("/view-products",productsController.getProductController)
 
-module.exports={route:router, productsList:products};
+router.post("/view-products",productsController.postProductController)
+
+module.exports=router
 
