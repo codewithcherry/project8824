@@ -4,9 +4,11 @@ const express=require('express');
 
 const path=require('path');
 
-const rootdir=require('../Backend/utils/utilpath')
+// const rootdir=require('../Backend/utils/utilpath') this code is not used because of template engine
 
 const bodyParser=require("body-parser");
+
+const _404ErrorController=require("./controllers/404controller.js")
 
 const app=express();
 
@@ -26,9 +28,6 @@ app.use(viewProductsrouter);
 app.use(homerouter);
 
 
-app.use((req,res,next)=>{
-    console.log("server just started");
-    res.render('404',{pagetitle:"Not responding | 404 Error"});
-})
+app.use(_404ErrorController.error404Controller);
 
 app.listen(3000);
