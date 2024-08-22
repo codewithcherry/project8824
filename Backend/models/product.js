@@ -1,20 +1,42 @@
-// this file is to code the model for products controller
+const fs = require('fs');
+const path = require('path');
 
-const products=[]
+const dataFolder = path.join(path.dirname(process.mainModule.filename), 'data');
+if (!fs.existsSync(dataFolder)){
+    fs.mkdirSync(dataFolder);
+}
 
-class Product{
-    constructor(title,description,price){
-        this.title=title;
-        this.description=description;
-        this.price=price;
+const p = path.join(dataFolder, 'products.json');
+
+class Product {
+    constructor(title, description, price) {
+        this.title = title;
+        this.description = description;
+        this.price = price;
     }
 
     save() {
-        products.push(this);
+        fs.readFile(p, (err, fileContent) => {
+            let products = [];
+            if (!err) {
+                products = JSON.parse(fileContent);
+            }
+            products.push(this);
+            fs.writeFile(p, JSON.stringify(products, null, 2), (err) => {
+                console.log(err);
+            });
+        });
     }
-    static fetchAll(){
-        return products
+
+    static fetchAll(cb) {
+        fs.readFile(p, (err, fileContent) => {
+            if (err) {
+                cb([]);
+            } else {
+                cb(JSON.parse(fileContent));
+            }
+        });
     }
 }
 
-module.exports= Product;
+module.exports = Product;

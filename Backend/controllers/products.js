@@ -19,6 +19,8 @@ exports.postProductController=(req,res,next)=>{
 
 exports.getProductController=(req,res,next)=>{
     console.log("view products page rendered");
-    const products=Product.fetchAll()
-    res.render('view-products',{pagetitle:"View Products",prods:products});
+    Product.fetchAll((products)=>{
+        res.render('view-products',{pagetitle:"View Products",prods:products});
+    })
+   
 }
