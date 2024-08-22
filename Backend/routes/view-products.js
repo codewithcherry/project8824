@@ -7,9 +7,7 @@ const router=express.Router();
 
 const productsController=require("../controllers/products")
 
-const rootdir=require("../utils/utilpath");
-
-
+// const rootdir=require("../utils/utilpath"); using template engine doesnot require the root dir
 
 router.get("/view-products",productsController.getProductController)
 
