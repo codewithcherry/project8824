@@ -1,0 +1,1 @@
+// this file is to code the model for products controller
