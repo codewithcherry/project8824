@@ -14,13 +14,13 @@ exports.postProductController=(req,res,next)=>{
     const {title,description,price}=req.body;
     const product=new Product(title,description,price);
     product.save()
-    res.redirect("/view-products");
+    res.redirect("shop/view-products");
 }
 
 exports.getProductController=(req,res,next)=>{
     console.log("view products page rendered");
     Product.fetchAll((products)=>{
-        res.render('view-products',{pagetitle:"View Products",prods:products});
+        res.render('shop/view-products',{pagetitle:"View Products",prods:products});
     })
    
 }
