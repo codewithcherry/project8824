@@ -28,6 +28,7 @@ body{
 .list{
     width: 100%;
     display: flex;
+    gap: 20px;
     list-style-type: none;
     text-decoration: none;
     justify-content: space-around;
@@ -49,7 +50,7 @@ list-items{
 
 .list a:hover{
     color:rgb(236, 47, 56);
-    font-weight: 600;
+  
 
 }
 .main-section{   

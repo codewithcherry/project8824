@@ -1,4 +1,5 @@
 doctype html
+include ./includes/navigation.pug
 html(lang="en")
   head
     meta(charset="UTF-8")
@@ -7,18 +8,7 @@ html(lang="en")
     link(rel="stylesheet" href="404.css")
     link(rel="stylesheet" href="main.css")
   body
-    .header-section
-      nav.navbar
-        .nav-container
-          .title My shop app
-          .list-conatiner
-            ul.list
-              li.list-item
-                a(href="/") Home
-              li.list-item
-                a(href="/add-product") Add Products
-              li.list-item
-                a(href="/view-products") Products
+    block navbar
     .error-container
       h1.error-title 404 Error
       p Requested page not responding. Try again later.
