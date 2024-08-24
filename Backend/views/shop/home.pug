@@ -1,4 +1,5 @@
 doctype html
+include ../includes/navigation.pug
 html(lang="en")
   head
     meta(charset="UTF-8")
@@ -6,17 +7,6 @@ html(lang="en")
     title= pagetitle
     link(rel="stylesheet" href="main.css")
   body
-    .header-section
-      nav.navbar
-        .nav-container
-          .title My shop app
-          .list-conatiner
-            ul.list
-              li.list-item
-                a(href="/") Home
-              li.list-item
-                a(href="/add-product") Add Products
-              li.list-item
-                a(href="/view-products") Products
+    block navbar
     .main-section 
       h1 This is the home page of my shop app
