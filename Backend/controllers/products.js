@@ -14,7 +14,7 @@ exports.postProductController=(req,res,next)=>{
     const {title,description,price}=req.body;
     const product=new Product(title,description,price);
     product.save()
-    res.redirect("shop/view-products");
+    res.redirect("/view-products");
 }
 
 exports.getProductController=(req,res,next)=>{
