@@ -21,11 +21,11 @@ app.use(express.static(path.join(__dirname,"public")));
 
 const adminRouter=require('./routes/adminRoutes.js');
 const shopRouter=require("./routes/shopRoutes.js")
-const homerouter=require('./routes/home.js');
+
 
 app.use(adminRouter);
 app.use(shopRouter);
-// app.use(homerouter);
+
 
 
 app.use(_404ErrorController.error404Controller);
