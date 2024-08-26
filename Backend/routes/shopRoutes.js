@@ -17,6 +17,7 @@ router.get('/home',shopController.getShopHome);
 router.post("/view-products",adminController.postProductController);
 
 router.get('/shop/cart',shopController.getShopCart);
+router.get('/shop/checkout',shopController.getShopCheckout);
 
-module.exports=router
+module.exports=router;
 

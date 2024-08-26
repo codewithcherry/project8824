@@ -19,3 +19,8 @@ exports.getShopCart=(req,res,next)=>{
     console.log("Cart page is rendered");
     res.render('shop/cart',{pageTitle:"my cart"});
 }
+
+exports.getShopCheckout=(req,res,next)=>{
+    console.log("checkout page rendered");
+    res.render("shop/checkout",{pageTitle:"Checkout Page"});
+}
