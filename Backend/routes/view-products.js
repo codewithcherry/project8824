@@ -6,10 +6,11 @@ const path=require("path")
 const router=express.Router();
 
 const productsController=require("../controllers/admin")
+const shopController=require('../controllers/shop')
 
 // const rootdir=require("../utils/utilpath"); using template engine doesnot require the root dir
 
-router.get("/view-products",productsController.getProductController)
+router.get("/view-products",shopController.getProdducts)
 
 router.post("/view-products",productsController.postProductController)
 
