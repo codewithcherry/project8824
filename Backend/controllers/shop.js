@@ -14,3 +14,8 @@ exports.getShopHome=(req,res,next)=>{
         res.render('shop/index',{pagetitle:"View Products",prods:products});
     })
 }
+
+exports.getShopCart=(req,res,next)=>{
+    console.log("Cart page is rendered");
+    res.render('shop/cart',{pageTitle:"my cart"});
+}

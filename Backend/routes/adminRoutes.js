@@ -2,11 +2,11 @@
 const express=require('express')
 
 
-const productsController=require('../controllers/admin')
+const adminController=require('../controllers/admin')
 
 const router=express.Router();
 
-router.get("/admin/add-product",productsController.addProductController);
+router.get("/admin/add-product",adminController.addProductController);
 
 
 module.exports=router
