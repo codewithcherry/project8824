@@ -7,3 +7,10 @@ exports.getProdducts=(req,res,next)=>{
     })
    
 };
+
+exports.getShopHome=(req,res,next)=>{
+    console.log("shop home page rendered");
+    Product.fetchAll((products)=>{
+        res.render('shop/index',{pagetitle:"View Products",prods:products});
+    })
+}

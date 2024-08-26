@@ -12,6 +12,8 @@ const shopController=require('../controllers/shop')
 
 router.get("/view-products",shopController.getProdducts)
 
+router.get('/home',shopController.getShopHome)
+
 router.post("/view-products",productsController.postProductController)
 
 module.exports=router

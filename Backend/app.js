@@ -25,7 +25,7 @@ const homerouter=require('./routes/home.js');
 
 app.use(adminRouter);
 app.use(shopRouter);
-app.use(homerouter);
+// app.use(homerouter);
 
 
 app.use(_404ErrorController.error404Controller);

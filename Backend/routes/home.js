@@ -1,13 +1,13 @@
 // this route is for home page of the website
 
-const express=require('express');
+// const express=require('express');
 
-const path=require('path')
+// const path=require('path')
 
-const router=express.Router();
+// const router=express.Router();
 
-const homePageController=require("../controllers/homeController")
+// const homePageController=require("../controllers/homeController")
 
-router.get("/",homePageController.homeController);
+// router.get("/",homePageController.homeController);
 
-module.exports=router;
+// module.exports=router;
