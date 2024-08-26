@@ -6,9 +6,9 @@ const adminController=require('../controllers/admin')
 
 const router=express.Router();
 
-router.get("/admin/add-product",adminController.addProductController);
+router.get("/add-product",adminController.addProductController);
 
-router.get("/admin/productslist",adminController.getadminProductslist);
+router.get("/productslist",adminController.getadminProductslist);
 
 
 module.exports=router
