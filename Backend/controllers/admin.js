@@ -15,6 +15,6 @@ exports.postProductController=(req,res,next)=>{
 
 exports.getadminProductslist=(req,res,next)=>{
     Product.fetchAll((products)=>{
-        res.render('admin/productslist',{pagetitle:"View Products",prods:products});
+        res.render('admin/productslist',{pagetitle:"Admin Products",prods:products});
     })
 }

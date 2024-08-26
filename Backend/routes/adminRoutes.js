@@ -8,7 +8,7 @@ const router=express.Router();
 
 router.get("/admin/add-product",adminController.addProductController);
 
-router.get("admin/productslist",adminController.getadminProductslist);
+router.get("/admin/productslist",adminController.getadminProductslist);
 
 
 module.exports=router
