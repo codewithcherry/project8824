@@ -5,7 +5,7 @@ const path=require("path")
 
 const router=express.Router();
 
-const productsController=require("../controllers/products")
+const productsController=require("../controllers/admin")
 
 // const rootdir=require("../utils/utilpath"); using template engine doesnot require the root dir
 

@@ -4,7 +4,7 @@ const path=require('path');
 
 const rootdir = require('../utils/utilpath');
 
-const productsController=require('../controllers/products')
+const productsController=require('../controllers/admin')
 
 const router=express.Router();
 
