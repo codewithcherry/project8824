@@ -12,3 +12,9 @@ exports.postProductController=(req,res,next)=>{
     product.save()
     res.redirect("/home");
 }
+
+exports.getadminProductslist=(req,res,next)=>{
+    Product.fetchAll((products)=>{
+        res.render('admin/productslist',{pagetitle:"View Products",prods:products});
+    })
+}
