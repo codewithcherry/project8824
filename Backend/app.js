@@ -19,12 +19,12 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 app.use(express.static(path.join(__dirname,"public")));
 
-const addProductsrouter=require('./routes/add-product.js');
-const viewProductsrouter=require("./routes/view-products.js")
+const adminRouter=require('./routes/adminRoutes.js');
+const shopRouter=require("./routes/shopRoutes.js")
 const homerouter=require('./routes/home.js');
 
-app.use(addProductsrouter);
-app.use(viewProductsrouter);
+app.use(adminRouter);
+app.use(shopRouter);
 app.use(homerouter);
 
 
