@@ -20,6 +20,11 @@ exports.getShopCart=(req,res,next)=>{
     res.render('shop/cart',{pageTitle:"my cart"});
 }
 
+exports.getOrders=(req,res,next)=>{
+    console.log("Orders page rendered");
+    res.render('shop/orders',{pageTitle:"My Orders"})
+}
+
 exports.getShopCheckout=(req,res,next)=>{
     console.log("checkout page rendered");
     res.render("shop/checkout",{pageTitle:"Checkout Page"});
