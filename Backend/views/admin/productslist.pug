@@ -9,3 +9,19 @@ html(lang="en")
     link(rel="stylesheet" href="/main.css")
   body
     block navbar
+    .main-section
+      h1 products
+      .products-container
+        if prods.length == 0
+          p No products to display 
+        else
+          each product in prods
+            .product
+              img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
+              h2.product-title= product.title
+              p.product-des= product.description 
+              h3.price  $ #{product.price}
+              .change-btn-container
+                a.edit-btn(href="/admin/edit-product") edit
+                form(action="/admin/delete-product", method="POST")
+                    button.delete-btn(type="submit") Delete
