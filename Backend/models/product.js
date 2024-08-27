@@ -16,7 +16,7 @@ class Product {
     }
 
     save() {
-        this.id=Math.random().toString();
+        this.id=Math.floor(Math.random()*1000000).toString();
         fs.readFile(p, (err, fileContent) => {
             let products = [];
             if (!err) {
