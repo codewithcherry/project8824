@@ -76,6 +76,9 @@ list-items{
     background-color: white;
 }
 .cart-button{
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0rem 0.5rem;
     padding: 8px;
     font-size: large;
     background-color: rgb(147, 229, 240);

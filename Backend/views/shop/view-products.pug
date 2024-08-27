@@ -21,3 +21,4 @@ html(lang="en")
               p.product-des= product.description 
               h3.price  $ #{product.price}
               button.cart-button add to cart
+              a.cart-button(href='/product/' + product.id) details
