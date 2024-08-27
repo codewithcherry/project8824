@@ -38,6 +38,13 @@ class Product {
             }
         });
     }
+
+    static findProduct(pid,cb){
+        this.fetchAll(products=>{
+            const item=products.find(p=>p.id===pid);
+            cb(item);
+        });   
+    }
 }
 
 module.exports = Product;

@@ -1,1 +1,19 @@
 //- this is user level to view product details
+
+doctype html
+include ../includes/navigation.pug
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= pageTitle
+    link(rel="stylesheet" href="/main.css")
+  body
+    block navbar
+    .product-container 
+        .product
+              img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
+              h2.product-title= productData.title
+              p.product-des= productData.description 
+              h3.price  $ #{productData.price}
+              button.cart-button add to cart
