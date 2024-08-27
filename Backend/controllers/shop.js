@@ -29,3 +29,9 @@ exports.getShopCheckout=(req,res,next)=>{
     console.log("checkout page rendered");
     res.render("shop/checkout",{pageTitle:"Checkout Page"});
 }
+
+exports.getProductDetails=(req,res,next)=>{
+    const prodId=req.params.productId;
+    console.log(prodId);
+    res.redirect("/home");
+}
