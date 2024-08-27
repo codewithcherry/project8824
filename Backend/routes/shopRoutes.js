@@ -10,6 +10,8 @@ const shopController=require('../controllers/shop')
 
 // const rootdir=require("../utils/utilpath"); using template engine doesnot require the root dir
 
+router.get("/",shopController.getProdducts);
+
 router.get("/view-products",shopController.getProdducts);
 
 router.get('/home',shopController.getShopHome);
