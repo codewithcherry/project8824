@@ -20,6 +20,12 @@ exports.getShopCart=(req,res,next)=>{
     res.render('shop/cart',{pageTitle:"my cart"});
 }
 
+exports.postShopCart=(req,res,next)=>{
+    const prodID=req.body.productId;
+    console.log(prodID);
+    res.render('shop/cart',{pageTitle:"My Cart",productId:prodID});
+}
+
 exports.getOrders=(req,res,next)=>{
     console.log("Orders page rendered");
     res.render('shop/orders',{pageTitle:"My Orders"})
