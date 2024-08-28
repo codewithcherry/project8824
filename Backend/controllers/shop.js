@@ -1,4 +1,5 @@
 const Product=require("../models/product");
+const Cart=require("../models/cart")
 
 exports.getProdducts=(req,res,next)=>{
     console.log("view products page rendered");
@@ -23,7 +24,11 @@ exports.getShopCart=(req,res,next)=>{
 exports.postShopCart=(req,res,next)=>{
     const prodID=req.body.productId;
     console.log(prodID);
-    res.render('shop/cart',{pageTitle:"My Cart",productId:prodID});
+    Product.findProduct(prodID,(product)=>{
+        Cart.addCartProduct(product.id,product.price);
+        res.render('shop/cart',{pageTitle:"My Cart",productId:prodID});
+    })
+    
 }
 
 exports.getOrders=(req,res,next)=>{
