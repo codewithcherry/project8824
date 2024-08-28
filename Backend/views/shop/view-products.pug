@@ -20,5 +20,7 @@ html(lang="en")
               h2.product-title= product.title
               p.product-des= product.description 
               h3.price  $ #{product.price}
-              button.cart-button add to cart
+              form.cart-form(action="/cart" method="post")
+                input(type="hidden" name="productId" value=product.id)
+                button.cart-button(type="submit") add to cart
               a.cart-button(href='/product/' + product.id) details

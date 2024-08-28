@@ -16,4 +16,6 @@ html(lang="en")
               h2.product-title= productData.title
               p.product-des= productData.description 
               h3.price  $ #{productData.price}
-              button.cart-button add to cart
+              form.cart-form(action="/cart" method="post")
+                input(type="hidden" name="productId" value=productData.id)
+                button.cart-button(type="submit") add to cart
