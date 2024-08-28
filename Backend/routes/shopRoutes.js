@@ -23,6 +23,8 @@ router.post("/view-products",adminController.postProductController);
 router.get("/orders",shopController.getOrders);
 
 router.get('/cart',shopController.getShopCart);
+
+router.post("/cart",shopController.postShopCart);
 router.get('/checkout',shopController.getShopCheckout);
 
 module.exports=router
