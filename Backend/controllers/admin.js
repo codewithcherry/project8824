@@ -22,6 +22,15 @@ exports.getadminProductslist=(req,res,next)=>{
 
 exports.getEditProduct=(req,res,next)=>{
     let prodID=req.params.productID;
-
-    res.render("admin/edit-products",{pageTitle:"Edit Product"});
+    let editmode=req.query.edit;
+    if(!editmode){
+        console.log("redirect to home page, editmode=false")
+        res.redirect("/")
+    }else{
+        Product.findProduct(prodID,(product)=>{
+            res.render("admin/edit-products",{pageTitle:"Edit Product",product:product});
+        })
+        
+    }
+    
 }

@@ -15,15 +15,17 @@ html(lang="en")
       .form-title-container
         h1.form-title Edit Product Details
       .form-container
-        form.form(action="/view-products" method="post")
+        form.form(action="/productslist" method="post")
           .form-item
             label(for="title") Product Title
-            input#title(type="text" name="title" placeholder="enter product title")
+            input#title(type="text" name="title" placeholder="enter product title" value=product.title)
           .form-item
             label(for="description") Description
-            input#description(type="text" name="description" placeholder="type short description..")
+            input#description(type="text" name="description" placeholder="type short description.." value=product.description)
           .form-item
             label(for="price") Price
-            input#price(type="number" name="price")
+            input#price(type="number" name="price" value=product.price)
+          .form-item 
+            input(type='hidden' name='id' value=product.id)
           .form-item
             button.submit-button(type="submit") update Details
