@@ -34,3 +34,10 @@ exports.getEditProduct=(req,res,next)=>{
     }
     
 }
+
+exports.postDeleteProduct=(req,res,next)=>{
+    let prodId=req.body.productID;
+    console.log(prodId);
+    Product.DeleteProduct(prodId);
+    res.redirect("/productslist");
+}
