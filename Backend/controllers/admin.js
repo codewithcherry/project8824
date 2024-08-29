@@ -7,8 +7,8 @@ exports.addProductController=(req,res,next)=>{
 }
 
 exports.postProductController=(req,res,next)=>{
-    const {title,description,price}=req.body;
-    const product=new Product(title,description,price);
+    const {id,title,description,price}=req.body;
+    const product=new Product(id,title,description,price);
     product.save()
     res.redirect("/home");
 }

@@ -9,24 +9,38 @@ if (!fs.existsSync(dataFolder)){
 const p = path.join(dataFolder, 'products.json');
 
 class Product {
-    constructor(title, description, price) {
+    constructor(id,title, description, price) {
+        this.id=id
         this.title = title;
         this.description = description;
         this.price = price;
     }
 
     save() {
-        this.id=Math.floor(Math.random()*1000000).toString();
-        fs.readFile(p, (err, fileContent) => {
-            let products = [];
-            if (!err) {
-                products = JSON.parse(fileContent);
-            }
-            products.push(this);
-            fs.writeFile(p, JSON.stringify(products, null, 2), (err) => {
-                console.log(err);
+        if(this.id){
+            Product.fetchAll((products=>{
+                let ExistingProductIndex=products.findIndex(product=>this.id===product.id);
+                products[ExistingProductIndex]=this
+                fs.writeFile(p, JSON.stringify(products, null, 2), (err) => {
+                    console.log(err);
+                });
+            }))
+
+        }
+        else{
+            this.id=Math.floor(Math.random()*1000000).toString();
+            fs.readFile(p, (err, fileContent) => {
+                let products = [];
+                if (!err) {
+                    products = JSON.parse(fileContent);
+                }
+                products.push(this);
+                fs.writeFile(p, JSON.stringify(products, null, 2), (err) => {
+                    console.log(err);
+                });
             });
-        });
+        }
+        
     }
 
     static fetchAll(cb) {
