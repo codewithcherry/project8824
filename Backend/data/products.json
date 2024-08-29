@@ -1,17 +1,5 @@
 [
   {
-    "id": "0.908472833482338",
-    "title": "maono mic",
-    "description": "This is 14W dual condenser mic for recording and studio setup for youtube  streaming",
-    "price": "129"
-  },
-  {
-    "id": "0.726735001444885",
-    "title": "flex chair max v2",
-    "description": "prashanth and family biography",
-    "price": "222"
-  },
-  {
     "id": "3411",
     "title": "green soul ergonomic seat",
     "description": "soft cusioned chair specially made for seating for long hours to reduce back and neck pain",
@@ -28,11 +16,5 @@
     "description": "This is the project, which needs to be done by next week.",
     "price": "299",
     "id": "618478"
-  },
-  {
-    "title": "project k",
-    "description": "Hihgly anticpated indian movie 0f 2024",
-    "price": "25",
-    "id": "113354"
   }
 ]
