@@ -18,7 +18,6 @@ router.get('/home',shopController.getShopHome);
 
 router.get('/product/:productId',shopController.getProductDetails);
 
-router.post("/view-products",adminController.postProductController);
 
 router.get("/orders",shopController.getOrders);
 
