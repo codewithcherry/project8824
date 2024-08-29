@@ -1,1 +1,29 @@
 //- edit product details at admin level
+
+doctype html
+include ../includes/navigation.pug
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= pageTitle
+    link(rel="stylesheet" href="/main.css")
+    link(rel="stylesheet" href="/addproduct.css")
+  body
+    block navbar
+    .main-container
+      .form-title-container
+        h1.form-title Edit Product Details
+      .form-container
+        form.form(action="/view-products" method="post")
+          .form-item
+            label(for="title") Product Title
+            input#title(type="text" name="title" placeholder="enter product title")
+          .form-item
+            label(for="description") Description
+            input#description(type="text" name="description" placeholder="type short description..")
+          .form-item
+            label(for="price") Price
+            input#price(type="number" name="price")
+          .form-item
+            button.submit-button(type="submit") update Details

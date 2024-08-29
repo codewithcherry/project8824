@@ -53,10 +53,11 @@
     border-radius: 3px;
 }
 .submit-button{
-    max-width: 150px;
+    cursor: pointer;
+    max-width: 70%;
     text-align: center;
-    margin: 0.5rem 0;
-    padding: 5px;
+    margin: 1rem 15%;
+    padding: 7px;
     background-color: rgb(97, 175, 97);
     color: rgb(215, 235, 206);
     border: 3px solid rgb(193, 241, 193);
