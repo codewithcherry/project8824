@@ -24,4 +24,5 @@ html(lang="en")
               .change-btn-container
                 a.edit-btn(href="/admin/edit-product/"+product.id+"?edit=true") edit
                 form(action="/admin/delete-product", method="POST")
+                    input(type="hidden" name="productID" value=product.id)
                     button.delete-btn(type="submit") Delete
