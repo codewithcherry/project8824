@@ -43,6 +43,13 @@ class Product {
         
     }
 
+    static DeleteProduct(id){
+        Product.fetchAll(products=>{
+            let updatedProducts=products.filter(product=>product.id!==id);
+            console.log(updatedProducts);
+        })
+    }
+
     static fetchAll(cb) {
         fs.readFile(p, (err, fileContent) => {
             if (err) {
