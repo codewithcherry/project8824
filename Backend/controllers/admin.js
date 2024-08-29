@@ -18,3 +18,10 @@ exports.getadminProductslist=(req,res,next)=>{
         res.render('admin/productslist',{pagetitle:"Admin Products",prods:products});
     })
 }
+
+
+exports.getEditProduct=(req,res,next)=>{
+    let prodID=req.params.productID;
+
+    res.render("admin/edit-products",{pageTitle:"Edit Product"});
+}

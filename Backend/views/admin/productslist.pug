@@ -22,6 +22,6 @@ html(lang="en")
               p.product-des= product.description 
               h3.price  $ #{product.price}
               .change-btn-container
-                a.edit-btn(href="/admin/edit-product") edit
+                a.edit-btn(href="/admin/edit-product/"+product.id) edit
                 form(action="/admin/delete-product", method="POST")
                     button.delete-btn(type="submit") Delete

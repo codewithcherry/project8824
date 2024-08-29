@@ -10,5 +10,7 @@ router.get("/add-product",adminController.addProductController);
 
 router.get("/productslist",adminController.getadminProductslist);
 
+router.get("/admin/edit-product/:productID",adminController.getEditProduct);
+
 
 module.exports=router;
