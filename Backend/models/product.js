@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const Cart=require('./cart')
+
 const dataFolder = path.join(path.dirname(process.mainModule.filename), 'data');
 if (!fs.existsSync(dataFolder)){
     fs.mkdirSync(dataFolder);
@@ -45,8 +47,13 @@ class Product {
 
     static DeleteProduct(id){
         Product.fetchAll(products=>{
+            let product=products.find(prod=>id===prod.id)
             let updatedProducts=products.filter(product=>product.id!==id);
             console.log(updatedProducts);
+            fs.writeFile(p,JSON.stringify(updatedProducts,null,2),(err)=>{
+                Cart.deleteCartProduct(product.id,product.price);
+                
+            })
         })
     }
 
