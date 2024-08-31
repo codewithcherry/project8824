@@ -10,4 +10,35 @@ html(lang="en")
   body
     block navbar
     .main-container 
-      h1 This is cart page
+      .cart-container
+      div
+          h1.cart-title My Cart
+      .cart-view
+          if products.length
+              each product in products
+                  .cart-card
+                      div
+                        div
+                          img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg", alt="productImage")
+                        div
+                          h2= product.title
+                          p $ #{product.price}
+                          p qty: 
+                              span= product.qty
+                      form.removeCartItem(action=`/cart/remove/${product.id}`, method="post")
+                          button.remove-btn(type="submit") Remove
+          else
+              p No products in your cart
+
+      .amount-container
+          p Total: 
+              span= totalPrice
+          p Tax: 
+              span 0
+          p Delivery: 
+              span 0
+          p Final Amount: 
+              span= finalAmount
+          .checkout-container
+              form(action="/checkout", method="post")
+                  button.checkout-btn(type="submit") checkout
