@@ -7,6 +7,7 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title= pagetitle
     link(rel="stylesheet" href="/main.css")
+    link(rel="stylesheet" href="/cart.css")
   body
     block navbar
     .main-container 
@@ -14,31 +15,32 @@ html(lang="en")
         div
           h1.cart-title My Cart
         .cart-view
-          if products.length
+          if products && products.length
             each product in products
               .cart-card
                 .cart-product
                   div
                     img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg", alt="productImage")
                   div
-                    h2= product.title
-                    p $ #{product.price}
-                    p qty: 
+                    h2.cart-item-title= product.title
+                    p.cart-item-price $ #{product.price}
+                    p.cart-item-qty quantity: 
                       span= product.qty
-              form.removeCartItem(action=`/cart/remove/${product.id}`, method="post")
-                button.remove-btn(type="submit") Remove
+                    form.removeCartItem(action=`/cart/remove/${product.id}`, method="post")
+                      button.remove-btn(type="submit") Remove
 
             .amount-container
-              p Total: 
-                span $#{amount}
-              p Tax: 
-                span 0
-              p Delivery: 
-                span 0
-              p Final Amount: 
-                span $#{amount}
-            .checkout-container
-              form(action="/checkout", method="post")
-                button.checkout-btn(type="submit") checkout
+              .price-box
+                p Total: 
+                  span $#{amount}
+                p Tax: 
+                  span 0
+                p Delivery: 
+                  span 0
+                p Final Amount: 
+                  span $#{amount}
+              .checkout-container
+                form(action="/checkout", method="post")
+                  button.checkout-btn(type="submit") checkout
           else
             p No products in your cart
