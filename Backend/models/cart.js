@@ -90,7 +90,7 @@ module.exports = class Cart {
 
             Promise.all(fetchProductPromises).then(products => {
                 cartItems = products.filter(product => product !== null); // Filter out any null values
-                cb(cartItems); // Return the array of products with their quantities
+                cb({products:cartItems,amount:cart.totalCartPrice}); // Return the array of products with their quantities
             });
         });
     }
