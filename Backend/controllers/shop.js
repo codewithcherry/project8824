@@ -18,6 +18,7 @@ exports.getShopHome=(req,res,next)=>{
 
 exports.getShopCart=(req,res,next)=>{
     console.log("Cart page is rendered");
+    Cart.FetchCartProducts(p=>console.log(p))
     res.render('shop/cart',{pageTitle:"my cart"});
 }
 

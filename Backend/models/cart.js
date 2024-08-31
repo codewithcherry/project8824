@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
+const Product=require("./product")
+
 const DataFolder = path.join(path.dirname(process.mainModule.filename), 'data');
 if (!fs.existsSync(DataFolder)) {
     fs.mkdirSync(DataFolder);
@@ -59,4 +61,38 @@ module.exports = class Cart {
         });
     }
 
-}
+    static FetchCartProducts(cb) {
+        fs.readFile(p, (err, fileContent) => {
+            if (err || fileContent.length == 0) {
+                cb([]); // Return an empty array if there's an error or the cart is empty
+                return;
+            }
+
+            let cart = JSON.parse(fileContent);
+            let cartItems = [];
+
+            // Lazy load the Product module to avoid circular dependency
+            const Product = require("./product");
+
+            // Use Promises to ensure all product details are fetched before returning the result
+            let fetchProductPromises = cart.products.map(cartProduct => {
+                return new Promise((resolve) => {
+                    Product.findProduct(cartProduct.id, (product) => {
+                        if (product) {
+                            product.qty = cartProduct.qty; // Add the quantity to the product object
+                            resolve(product);
+                        } else {
+                            resolve(null); // If the product is not found, resolve with null
+                        }
+                    });
+                });
+            });
+
+            Promise.all(fetchProductPromises).then(products => {
+                cartItems = products.filter(product => product !== null); // Filter out any null values
+                cb(cartItems); // Return the array of products with their quantities
+            });
+        });
+    }
+    
+    }

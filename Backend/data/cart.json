@@ -1,4 +1,13 @@
 {
-  "products": [],
-  "totalCartPrice": 0
+  "products": [
+    {
+      "id": "572626",
+      "qty": 1
+    },
+    {
+      "id": "3411",
+      "qty": 1
+    }
+  ],
+  "totalCartPrice": 152
 }
