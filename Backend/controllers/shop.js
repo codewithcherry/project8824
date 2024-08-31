@@ -29,7 +29,7 @@ exports.postShopCart=(req,res,next)=>{
     console.log(prodID);
     Product.findProduct(prodID,(product)=>{
         Cart.addCartProduct(product.id,product.price);
-        res.render('shop/cart',{pageTitle:"My Cart",productId:prodID});
+        res.redirect("/cart");
     })
     
 }
