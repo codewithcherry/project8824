@@ -26,7 +26,8 @@ html(lang="en")
                     p.cart-item-price $ #{product.price}
                     p.cart-item-qty quantity: 
                       span= product.qty
-                    form.removeCartItem(action=`/cart/remove/${product.id}`, method="post")
+                    form.removeCartItem(action=`/cart-remove-product`, method="post")
+                      input(type="hidden" name="productId" value=product.id)
                       button.remove-btn(type="submit") Remove
 
             .amount-container
