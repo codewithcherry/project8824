@@ -34,6 +34,14 @@ exports.postShopCart=(req,res,next)=>{
     
 }
 
+exports.postDeleteCartProduct=(req,res,next)=>{
+    const prodID=req.body.productId;
+    Product.findProduct(prodID,product=>{
+        Cart.deleteCartProduct(prodID,product.price);
+        res.redirect("/cart");
+    })
+}
+
 exports.getOrders=(req,res,next)=>{
     console.log("Orders page rendered");
     res.render('shop/orders',{pageTitle:"My Orders"})
