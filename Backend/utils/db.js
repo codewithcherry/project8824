@@ -1,7 +1,7 @@
 const mongodb=require('mongodb');
 const MongoClient=mongodb.MongoClient;
 
-
+const uri=require('./dbcredentials')
 
 const connectMongo =(callback)=>{
 
