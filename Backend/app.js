@@ -4,7 +4,7 @@ const express=require('express');
 
 const path=require('path');
 
-const mongoConnect=require("./utils/db.js")
+const {mongoClientConnect}=require("./utils/db.js")
 // const rootdir=require('../Backend/utils/utilpath') this code is not used because of template engine
 
 const bodyParser=require("body-parser");
@@ -31,8 +31,7 @@ app.use(shopRouter);
 
 app.use(_404ErrorController.error404Controller);
 
-mongoConnect(client=>{
-    console.log(client);
+mongoClientConnect(client=>{   
     app.listen(3000);
 })
 
