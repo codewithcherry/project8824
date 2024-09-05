@@ -31,20 +31,20 @@ class Product {
                 .find()
                 .toArray()
                 .then(products=>{
-                    return products
+                    cb(products)
                 })
                 .catch(err=>{
                     console.log(err)
                 })
     }
 
-    static findProduct(pid){
+    static findProduct(pid,cb){
         const db=getDb();
         return db.collection('products')
                 .find({_id:new mongodb.ObjectId(pid)})
                 .next()
                 .then(product=>{
-                    return product;
+                    cb(product);
                 })
                 .catch(err=>{
                     console.log(err);
