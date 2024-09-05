@@ -16,47 +16,47 @@ exports.getShopHome=(req,res,next)=>{
     })
 }
 
-exports.getShopCart=(req,res,next)=>{
-    console.log("Cart page is rendered");
-    Cart.FetchCartProducts(data=>{
-        res.render('shop/cart',{pageTitle:"my cart",products:data.products,amount:data.amount});
-    })
+// exports.getShopCart=(req,res,next)=>{
+//     console.log("Cart page is rendered");
+//     Cart.FetchCartProducts(data=>{
+//         res.render('shop/cart',{pageTitle:"my cart",products:data.products,amount:data.amount});
+//     })
     
-}
+// }
 
-exports.postShopCart=(req,res,next)=>{
-    const prodID=req.body.productId;
-    console.log(prodID);
-    Product.findProduct(prodID,(product)=>{
-        Cart.addCartProduct(product.id,product.price);
-        res.redirect("/cart");
-    })
+// exports.postShopCart=(req,res,next)=>{
+//     const prodID=req.body.productId;
+//     console.log(prodID);
+//     Product.findProduct(prodID,(product)=>{
+//         Cart.addCartProduct(product.id,product.price);
+//         res.redirect("/cart");
+//     })
     
-}
+// }
 
-exports.postDeleteCartProduct=(req,res,next)=>{
-    const prodID=req.body.productId;
-    Product.findProduct(prodID,product=>{
-        Cart.deleteCartProduct(prodID,product.price);
-        res.redirect("/cart");
-    })
-}
+// exports.postDeleteCartProduct=(req,res,next)=>{
+//     const prodID=req.body.productId;
+//     Product.findProduct(prodID,product=>{
+//         Cart.deleteCartProduct(prodID,product.price);
+//         res.redirect("/cart");
+//     })
+// }
 
-exports.getOrders=(req,res,next)=>{
-    console.log("Orders page rendered");
-    res.render('shop/orders',{pageTitle:"My Orders"})
-}
+// exports.getOrders=(req,res,next)=>{
+//     console.log("Orders page rendered");
+//     res.render('shop/orders',{pageTitle:"My Orders"})
+// }
 
-exports.getShopCheckout=(req,res,next)=>{
-    console.log("checkout page rendered");
-    res.render("shop/checkout",{pageTitle:"Checkout Page"});
-}
+// exports.getShopCheckout=(req,res,next)=>{
+//     console.log("checkout page rendered");
+//     res.render("shop/checkout",{pageTitle:"Checkout Page"});
+// }
 
-exports.getProductDetails=(req,res,next)=>{
-    const prodId=req.params.productId;
-    Product.findProduct(prodId,product=>{
-        res.render("shop/product-details",{pageTitle:"product details",productData:product});
-    });
+// exports.getProductDetails=(req,res,next)=>{
+//     const prodId=req.params.productId;
+//     Product.findProduct(prodId,product=>{
+//         res.render("shop/product-details",{pageTitle:"product details",productData:product});
+//     });
     
     
-}
+// }

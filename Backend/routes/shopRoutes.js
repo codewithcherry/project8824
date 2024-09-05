@@ -16,17 +16,17 @@ router.get("/view-products",shopController.getProdducts);
 
 router.get('/home',shopController.getShopHome);
 
-router.get('/product/:productId',shopController.getProductDetails);
+// router.get('/product/:productId',shopController.getProductDetails);
 
 
-router.get("/orders",shopController.getOrders);
+// router.get("/orders",shopController.getOrders);
 
-router.get('/cart',shopController.getShopCart);
+// router.get('/cart',shopController.getShopCart);
 
-router.post("/cart",shopController.postShopCart);
+// router.post("/cart",shopController.postShopCart);
 
-router.post("/cart-remove-product",shopController.postDeleteCartProduct);
-router.get('/checkout',shopController.getShopCheckout);
+// router.post("/cart-remove-product",shopController.postDeleteCartProduct);
+// router.get('/checkout',shopController.getShopCheckout);
 
 module.exports=router
 

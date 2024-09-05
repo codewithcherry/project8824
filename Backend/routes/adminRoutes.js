@@ -8,15 +8,15 @@ const router=express.Router();
 
 router.get("/add-product",adminController.addProductController);
 
-router.get("/productslist",adminController.getadminProductslist);
+// router.get("/productslist",adminController.getadminProductslist);
 
 router.post("/view-products",adminController.postProductController);
 
-router.post("/productslist",adminController.postProductController);
+// router.post("/productslist",adminController.postProductController);
 
-router.post("/admin/delete-product",adminController.postDeleteProduct);
+// router.post("/admin/delete-product",adminController.postDeleteProduct);
 
-router.get("/admin/edit-product/:productID",adminController.getEditProduct);
+// router.get("/admin/edit-product/:productID",adminController.getEditProduct);
 
 
 module.exports=router;

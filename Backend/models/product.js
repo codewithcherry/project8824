@@ -3,7 +3,8 @@ const path = require('path');
 
 const Cart=require('./cart')
 
-const {getDb}=require("../utils/db")
+const {getDb}=require("../utils/db");
+const { get } = require('http');
 
 const dataFolder = path.join(path.dirname(process.mainModule.filename), 'data');
 if (!fs.existsSync(dataFolder)){
@@ -36,7 +37,16 @@ class Product {
     }
 
     static fetchAll(cb) {
-       
+       const db=getDb()
+       return db.collection("products")
+                .find()
+                .toArray()
+                .then(products=>{
+                    return products
+                })
+                .catch(err=>{
+                    console.log(err)
+                })
     }
 
     static findProduct(pid,cb){

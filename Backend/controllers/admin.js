@@ -19,31 +19,31 @@ exports.postProductController=(req,res,next)=>{
    
 }
 
-exports.getadminProductslist=(req,res,next)=>{
-    Product.fetchAll((products)=>{
-        res.render('admin/productslist',{pagetitle:"Admin Products",prods:products});
-    })
-}
+// exports.getadminProductslist=(req,res,next)=>{
+//     Product.fetchAll((products)=>{
+//         res.render('admin/productslist',{pagetitle:"Admin Products",prods:products});
+//     })
+// }
 
 
-exports.getEditProduct=(req,res,next)=>{
-    let prodID=req.params.productID;
-    let editmode=req.query.edit;
-    if(!editmode){
-        console.log("redirect to home page, editmode=false")
-        res.redirect("/")
-    }else{
-        Product.findProduct(prodID,(product)=>{
-            res.render("admin/edit-products",{pageTitle:"Edit Product",product:product});
-        })
+// exports.getEditProduct=(req,res,next)=>{
+//     let prodID=req.params.productID;
+//     let editmode=req.query.edit;
+//     if(!editmode){
+//         console.log("redirect to home page, editmode=false")
+//         res.redirect("/")
+//     }else{
+//         Product.findProduct(prodID,(product)=>{
+//             res.render("admin/edit-products",{pageTitle:"Edit Product",product:product});
+//         })
         
-    }
+//     }
     
-}
+// }
 
-exports.postDeleteProduct=(req,res,next)=>{
-    let prodId=req.body.productID;
-    console.log(prodId);
-    Product.DeleteProduct(prodId);
-    res.redirect("/productslist");
-}
+// exports.postDeleteProduct=(req,res,next)=>{
+//     let prodId=req.body.productID;
+//     console.log(prodId);
+//     Product.DeleteProduct(prodId);
+//     res.redirect("/productslist");
+// }

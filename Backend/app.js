@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,"public")));
 
 const adminRouter=require('./routes/adminRoutes.js');
-const shopRouter=require("./routes/shopRoutes.js")
+const shopRouter=require("./routes/shopRoutes.js");
 
 
 app.use(adminRouter);
