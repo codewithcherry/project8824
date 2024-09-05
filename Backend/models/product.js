@@ -1,17 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-
 const Cart=require('./cart')
-
+const mongodb=require('mongodb')
 const {getDb}=require("../utils/db");
-const { get } = require('http');
-
-const dataFolder = path.join(path.dirname(process.mainModule.filename), 'data');
-if (!fs.existsSync(dataFolder)){
-    fs.mkdirSync(dataFolder);
-}
-
-const p = path.join(dataFolder, 'products.json');
 
 class Product {
     constructor(title, description, price) {       
@@ -49,8 +38,17 @@ class Product {
                 })
     }
 
-    static findProduct(pid,cb){
-        
+    static findProduct(pid){
+        const db=getDb();
+        return db.collection('products')
+                .find({_id:new mongodb.ObjectId(pid)})
+                .next()
+                .then(product=>{
+                    return product;
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
     }
 }
 

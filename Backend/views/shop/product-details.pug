@@ -17,5 +17,5 @@ html(lang="en")
               p.product-des= productData.description 
               h3.price  $ #{productData.price}
               form.cart-form(action="/cart" method="post")
-                input(type="hidden" name="productId" value=productData.id)
+                input(type="hidden" name="productId" value=productData._id)
                 button.cart-button(type="submit") add to cart

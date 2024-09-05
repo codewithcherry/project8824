@@ -26,4 +26,4 @@ html(lang="en")
                 form.cart-form(action="/cart" method="post")
                   input(type="hidden" name="productId" value=product.id)
                   button.cart-button(type="submit") add to cart
-                a.cart-button(href='/product/' + product.id) Details
+                a.cart-button(href='/product/' + product._id) Details

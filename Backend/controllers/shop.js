@@ -52,11 +52,11 @@ exports.getShopHome=(req,res,next)=>{
 //     res.render("shop/checkout",{pageTitle:"Checkout Page"});
 // }
 
-// exports.getProductDetails=(req,res,next)=>{
-//     const prodId=req.params.productId;
-//     Product.findProduct(prodId,product=>{
-//         res.render("shop/product-details",{pageTitle:"product details",productData:product});
-//     });
+exports.getProductDetails=(req,res,next)=>{
+    const prodId=req.params.productId;
+    Product.findProduct(prodId,product=>{
+        res.render("shop/product-details",{pageTitle:"product details",productData:product});
+    });
     
     
-// }
+}
