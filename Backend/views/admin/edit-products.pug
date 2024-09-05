@@ -26,6 +26,6 @@ html(lang="en")
             label(for="price") Price
             input#price(type="number" name="price" value=product.price)
           .form-item 
-            input(type='hidden' name='id' value=product._id)
+            input(type='hidden' name='_id' value=product._id)
           .form-item
             button.submit-button(type="submit") update Details
