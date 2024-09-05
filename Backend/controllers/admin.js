@@ -44,6 +44,9 @@ exports.getEditProduct=(req,res,next)=>{
 exports.postDeleteProduct=(req,res,next)=>{
     let prodId=req.body.productID;
     console.log(prodId);
-    Product.DeleteProduct(prodId);
-    res.redirect("/productslist");
+    Product.DeleteProduct(prodId).then(result=>{
+        console.log(result);
+        res.redirect("/productslist");
+    });
+   
 }

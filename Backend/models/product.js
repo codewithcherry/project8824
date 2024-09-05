@@ -30,6 +30,16 @@ class Product {
     }
 
     static DeleteProduct(id){
+        const db=getDb()
+        return db.collection("products").deleteOne({_id:new mongodb.ObjectId(id)})
+        .then(
+            result=>{
+                console.log("deleted sucessfully")
+                return result
+            }
+        ).catch(err=>{
+            console.log(err)
+        })
        
     }
 
