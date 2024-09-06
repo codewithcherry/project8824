@@ -1,6 +1,7 @@
 // this is the root file which will executed to start the node server
 const express=require('express');
 const path=require('path');
+const mongodb=require('mongodb')
 const {mongoClientConnect}=require("./utils/db.js")
 // const rootdir=require('../Backend/utils/utilpath') this code is not used because of template engine
 const bodyParser=require("body-parser");
@@ -23,7 +24,7 @@ app.use((req,res,next)=>{
     User.findUserbyId("66dab8b0bdb87e934d2593eb")
     .then(user=>{
         console.log(user);
-        req.user=user;
+        req.user=new User(new mongodb.ObjectId(user._id),user.userName,user.email,user.cart);
         next();
     })
     .catch(err=>{

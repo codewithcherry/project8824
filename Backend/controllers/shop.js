@@ -1,6 +1,8 @@
 const Product=require("../models/product");
 const Cart=require("../models/cart")
 
+const User=require("../models/users");
+
 exports.getProdducts=(req,res,next)=>{
     console.log("view products page rendered");
     Product.fetchAll((products)=>{
@@ -26,17 +28,21 @@ exports.getShopCart=(req,res,next)=>{
 
 exports.postShopCart=(req,res,next)=>{
     const prodID=req.body.productId;
-    console.log(prodID);
-    Product.findProduct(prodID,(product)=>{
-        Cart.addCartProduct(product.id,product.price);
-        res.redirect("/cart");
+    Product.findProduct(prodID).then(product=>{
+        return req.user.addToCart(product)
+                .then(p=>{
+                    console.log(p);
+                    res.redirect("/cart");
+                })
+                .catch(err=>console.log(err));
     })
+    
     
 }
 
 exports.postDeleteCartProduct=(req,res,next)=>{
     const prodID=req.body.productId;
-    Product.findProduct(prodID,product=>{
+    Product.findProduct(prodID).then(product=>{
         Cart.deleteCartProduct(prodID,product.price);
         res.redirect("/cart");
     })
@@ -54,7 +60,7 @@ exports.getShopCheckout=(req,res,next)=>{
 
 exports.getProductDetails=(req,res,next)=>{
     const prodId=req.params.productId;
-    Product.findProduct(prodId,product=>{
+    Product.findProduct(prodId).then(product=>{
         res.render("shop/product-details",{pageTitle:"product details",productData:product});
     });
     
