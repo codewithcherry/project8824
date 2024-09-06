@@ -57,13 +57,12 @@ class Product {
                 })
     }
 
-    static findProduct(pid,cb){
+    static findProduct(pid){
         const db=getDb();
         return db.collection('products')
-                .find({_id:new mongodb.ObjectId(pid)})
-                .next()
+                .findOne({_id:new mongodb.ObjectId(pid)})
                 .then(product=>{
-                    cb(product);
+                    return product;
                 })
                 .catch(err=>{
                     console.log(err);
