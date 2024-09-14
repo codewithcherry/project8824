@@ -20,7 +20,7 @@ class User{
         let updatedCartItems=[...this.cart.items]
         let updatedCart=this.cart
         if(cartProductIndex>=0){
-            newQuantity=newQuantity+1;
+            newQuantity=updatedCartItems[cartProductIndex].quantity+1;
             updatedCartItems[cartProductIndex].quantity=newQuantity;
             updatedCart={items:updatedCartItems}
         }
