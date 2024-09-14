@@ -20,8 +20,9 @@ exports.getShopHome=(req,res,next)=>{
 
 exports.getShopCart=(req,res,next)=>{
     console.log("Cart page is rendered");
-    Cart.FetchCartProducts(data=>{
-        res.render('shop/cart',{pageTitle:"my cart",products:data.products,amount:data.amount});
+    req.user.getCart()
+    .then(products=>{
+        res.render('shop/cart',{pageTitle:"my cart",products:products});
     })
     
 }
