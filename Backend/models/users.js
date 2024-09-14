@@ -15,7 +15,20 @@ class User{
     }
 
     addToCart(product){
-        let updatedCart={items:[{productId:new mongodb.ObjectId(product._id),quantity:1}]}
+        let cartProductIndex=this.cart.items.findIndex(p=> p.productId.toString()==product._id.toString())
+        let newQuantity=1;
+        let updatedCartItems=[...this.cart.items]
+        let updatedCart=this.cart
+        if(cartProductIndex>=0){
+            newQuantity=newQuantity+1;
+            updatedCartItems[cartProductIndex].quantity=newQuantity;
+            updatedCart={items:updatedCartItems}
+        }
+        else{
+            updatedCartItems.push({productId:new mongodb.ObjectId(product._id),quantity:newQuantity})
+            updatedCart={items:updatedCartItems}
+        }
+       
         let db=getDb()
         return db
         .collection("users")
