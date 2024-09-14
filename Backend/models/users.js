@@ -38,6 +38,31 @@ class User{
         );
     }
 
+    getCart() {
+        const db = getDb();
+        
+        // Get the list of product IDs in the cart
+        const productIds = this.cart.items.map(item => item.productId);
+        
+        // Fetch all products in the cart from the products collection
+        return db
+            .collection('products')
+            .find({ _id: { $in: productIds } }) // Find products whose _id is in the cart
+            .toArray()
+            .then(products => {
+                return products.map(product => {
+                    // Find the quantity of the current product from the user's cart
+                    const cartItem = this.cart.items.find(item => {
+                        return item.productId.toString() === product._id.toString();
+                    });
+                    return { ...product, quantity: cartItem.quantity };
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
     static findUserbyId(uid){
         let db=getDb();
 
