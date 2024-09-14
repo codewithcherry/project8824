@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use((req,res,next)=>{
     User.findUserbyId("66dab8b0bdb87e934d2593eb")
     .then(user=>{
-        console.log(user);
+        
         req.user=new User(new mongodb.ObjectId(user._id),user.userName,user.email,user.cart);
         next();
     })
