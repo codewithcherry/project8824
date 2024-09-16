@@ -1,0 +1,94 @@
+.orders-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.title h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Order Section */
+.order {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.order h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.orderitems ul.orderslist {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.order-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.order-item p {
+    margin: 0;
+    color: #666;
+}
+
+/* Responsive Design */
+
+/* For small screens (mobile) */
+@media (max-width: 768px) {
+    .order {
+        padding: 10px;
+    }
+
+    .order h2 {
+        font-size: 1.2rem;
+    }
+
+    .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 0;
+    }
+
+    .order-item p {
+        font-size: 0.9rem;
+    }
+
+    .title h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* For very small screens (mobile portrait) */
+@media (max-width: 480px) {
+    .order h2 {
+        font-size: 1rem;
+    }
+
+    .order-item p {
+        font-size: 0.8rem;
+    }
+
+    .title h1 {
+        font-size: 1.2rem;
+    }
+}
