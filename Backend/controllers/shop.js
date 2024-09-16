@@ -60,10 +60,16 @@ exports.getShopCheckout=(req,res,next)=>{
     res.render("shop/checkout",{pageTitle:"Checkout Page"});
 }
 
+exports.getOrders=(req,res,next)=>{
+    req.user.getOrders().then(result=>{
+        res.render("shop/orders",{pageTitle:"Orders",orders:result});
+    })
+}
+
 exports.postCartToOrders=(req,res,next)=>{
     console.log("checkoutpage after posting from cart");
     req.user.addToOrders().then(result=>{
-        res.render("shop/orders",{pageTitle:"orders"});
+        res.redirect("/orders")
     })
 }
 
