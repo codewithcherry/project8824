@@ -38,6 +38,20 @@ class User{
         );
     }
 
+    deleteItemFromCart(productID){
+        let updatedCartItems=[...this.cart.items]
+        updatedCartItems=updatedCartItems.filter(product=>{
+            return product.productId.toString()!==productID.toString();
+        })
+
+        let db=getDb()
+            return db.collection("users")
+                .updateOne(
+                    { _id:new mongodb.ObjectId(this._id )},
+                    {$set:{cart:{items:updatedCartItems}}}
+                )
+    }
+
     getCart() {
         const db = getDb();
         
