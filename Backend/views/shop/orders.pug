@@ -5,7 +5,26 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title= pagetitle
+    title= pageTitle
     link(rel="stylesheet" href="/main.css")
+    link(rel="stylesheet" href="/orders.css")
   body
     block navbar
+    .orders-container
+        .title 
+          h1 Order History
+        if orders.length > 0
+            each order in orders
+                .order
+                    h2 Order ID # -#{order._id}
+                    .orderitems
+                        ul.orderslist
+                            each item in order.items
+                                li.order-item
+                                    div
+                                        p #{item.title}
+                                        p $ #{item.price}
+                                        p Quantity: #{item.quantity}
+        else
+            p No orders to display
+
