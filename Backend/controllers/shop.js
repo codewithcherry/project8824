@@ -43,10 +43,11 @@ exports.postShopCart=(req,res,next)=>{
 
 exports.postDeleteCartProduct=(req,res,next)=>{
     const prodID=req.body.productId;
-    Product.findProduct(prodID).then(product=>{
-        Cart.deleteCartProduct(prodID,product.price);
-        res.redirect("/cart");
-    })
+    req.user.deleteItemFromCart(prodID)
+    .then(result=>{
+        res.redirect("/cart")
+        })
+    .catch(err=>console.log(err))
 }
 
 exports.getOrders=(req,res,next)=>{
