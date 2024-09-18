@@ -1,8 +1,11 @@
 // this is the root file which will executed to start the node server
 const express=require('express');
 const path=require('path');
-const mongodb=require('mongodb')
-const {mongoClientConnect}=require("./utils/db.js")
+// const mongodb=require('mongodb')
+// const {mongoClientConnect}=require("./utils/db.js")
+
+const mongoose=require("mongoose");
+const {uri}=require("./utils/dbcredentials.js")
 // const rootdir=require('../Backend/utils/utilpath') this code is not used because of template engine
 const bodyParser=require("body-parser");
 const _404ErrorController=require("./controllers/404controller.js")
@@ -40,7 +43,17 @@ app.use(shopRouter);
 
 app.use(_404ErrorController.error404Controller);
 
-mongoClientConnect(client=>{   
+// mongoClientConnect(client=>{   
+//     app.listen(3000);
+// })  
+
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }).then(()=>{
     app.listen(3000);
+})
+.catch((err)=>{
+    console.log("database connection failed",err)
 })
 
