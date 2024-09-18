@@ -6,18 +6,26 @@ exports.addProductController=(req,res,next)=>{
     res.render("admin/add-product",{pagetitle:"Add Products"});
 }
 
-exports.postProductController=(req,res,next)=>{
-    const {_id,title,description,price}=req.body;
-    const product=new Product(_id,title,description,price,req.user._id);
-    product.save().then(result=>{
-        res.redirect("/home");
-    }
-    )
-    .catch(err=>{
-        console.log(err)
-    })
-   
-}
+exports.postProductController = (req, res, next) => {
+    // Destructure title, description, and price from req.body
+    const { title, description, price } = req.body;
+
+    // Pass an object to the Product constructor
+    const product = new Product({
+        title: title,         // or just 'title' in shorthand
+        description: description,
+        price: price
+    });
+
+    // Save the product to the database
+    product.save()
+        .then(result => {
+            res.redirect('/home');
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
 
 exports.getadminProductslist=(req,res,next)=>{
     Product.fetchAll((products)=>{
