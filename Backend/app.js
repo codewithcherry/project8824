@@ -23,17 +23,17 @@ const shopRouter=require("./routes/shopRoutes.js");
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,"public")));
 
-app.use((req,res,next)=>{
-    User.findUserbyId("66dab8b0bdb87e934d2593eb")
-    .then(user=>{
+// app.use((req,res,next)=>{
+//     User.findUserbyId("66dab8b0bdb87e934d2593eb")
+//     .then(user=>{
         
-        req.user=new User(new mongodb.ObjectId(user._id),user.userName,user.email,user.cart);
-        next();
-    })
-    .catch(err=>{
-        console.log(err);
-    })
-})
+//         req.user=new User(new mongodb.ObjectId(user._id),user.userName,user.email,user.cart);
+//         next();
+//     })
+//     .catch(err=>{
+//         console.log(err);
+//     })
+// })
 
 
 app.use(adminRouter);
@@ -47,10 +47,8 @@ app.use(_404ErrorController.error404Controller);
 //     app.listen(3000);
 // })  
 
-mongoose.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }).then(()=>{
+mongoose.connect(uri).then(()=>{
+    console.log("server started with mongodb connection")
     app.listen(3000);
 })
 .catch((err)=>{
