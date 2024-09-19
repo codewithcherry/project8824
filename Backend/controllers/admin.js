@@ -75,8 +75,8 @@ exports.postEditProductDetails=(req,res,next)=>{
 exports.postDeleteProduct=(req,res,next)=>{
     let prodId=req.body.productID;
     console.log(prodId);
-    Product.DeleteProduct(prodId).then(result=>{
-        console.log(result);
+    Product.findByIdAndDelete(prodId).then(result=>{
+        console.log("deleted Product:",result);
         res.redirect("/productslist");
     });
    
