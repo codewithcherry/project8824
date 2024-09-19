@@ -8,7 +8,7 @@ exports.addProductController=(req,res,next)=>{
 
 exports.postProductController = (req, res, next) => {
     // Destructure title, description, and price from req.body
-    const { updatedtitle, updateddescription, updatedprice } = req.body;
+    const { title, description, price } = req.body;
 
     // Pass an object to the Product constructor
     const product = new Product({
