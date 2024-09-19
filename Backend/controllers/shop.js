@@ -81,7 +81,7 @@ exports.postCartToOrders=(req,res,next)=>{
 
 exports.getProductDetails=(req,res,next)=>{
     const prodId=req.params.productId;
-    Product.findProduct(prodId).then(product=>{
+    Product.findById(prodId).then(product=>{
         res.render("shop/product-details",{pageTitle:"product details",productData:product});
     });
     
