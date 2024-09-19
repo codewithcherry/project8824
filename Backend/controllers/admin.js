@@ -28,8 +28,11 @@ exports.postProductController = (req, res, next) => {
 };
 
 exports.getadminProductslist=(req,res,next)=>{
-    Product.fetchAll((products)=>{
-        res.render('admin/productslist',{pagetitle:"Admin Products",prods:products});
+    Product.find().then((products)=>{
+        return  res.render('admin/productslist',{pagetitle:"View Products",prods:products});
+    })
+    .catch(err=>{
+        return console.log(err);
     })
 }
 
