@@ -8,7 +8,7 @@ exports.addProductController=(req,res,next)=>{
 
 exports.postProductController = (req, res, next) => {
     // Destructure title, description, and price from req.body
-    const { title, description, price } = req.body;
+    const { updatedtitle, updateddescription, updatedprice } = req.body;
 
     // Pass an object to the Product constructor
     const product = new Product({
@@ -50,6 +50,26 @@ exports.getEditProduct=(req,res,next)=>{
         
     }
     
+}
+
+exports.postEditProductDetails=(req,res,next)=>{
+    const prodID=req.body._id;
+    const updatedTitle=req.body.title;
+    const updatedDescription=req.body.description;
+    const updatedPrice=req.body.price;
+
+    Product.findById(prodID).then(product=>{
+        product.title=updatedTitle;
+        product.description=updatedDescription;
+        product.price=updatedPrice;
+        return product.save()
+    })
+    .then(product=>{
+        res.redirect("/productslist");
+    })
+    .catch(err=>{
+        console.log(err);
+    })
 }
 
 exports.postDeleteProduct=(req,res,next)=>{
