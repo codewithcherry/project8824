@@ -5,16 +5,22 @@ const User=require("../models/users");
 
 exports.getProdducts=(req,res,next)=>{
     console.log("view products page rendered");
-    Product.fetchAll((products)=>{
-        res.render('shop/view-products',{pagetitle:"View Products",prods:products});
+    Product.find().then((products)=>{
+        return  res.render('shop/index',{pagetitle:"View Products",prods:products});
+    })
+    .catch(err=>{
+        return console.log(err);
     })
    
 };
 
 exports.getShopHome=(req,res,next)=>{
     console.log("shop home page rendered");
-    Product.fetchAll((products)=>{
-        res.render('shop/index',{pagetitle:"View Products",prods:products});
+    Product.find().then((products)=>{
+        return  res.render('shop/index',{pagetitle:"View Products",prods:products});
+    })
+    .catch(err=>{
+        return console.log(err);
     })
 }
 
