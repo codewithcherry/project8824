@@ -12,7 +12,7 @@ router.get("/productslist",adminController.getadminProductslist);
 
 router.post("/view-products",adminController.postProductController);
 
-router.post("/productslist",adminController.postProductController);
+router.post("/productslist",adminController.postEditProductDetails);
 
 router.post("/admin/delete-product",adminController.postDeleteProduct);
 
