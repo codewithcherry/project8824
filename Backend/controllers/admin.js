@@ -44,7 +44,7 @@ exports.getEditProduct=(req,res,next)=>{
         console.log("redirect to home page, editmode=false")
         res.redirect("/")
     }else{
-        Product.findProduct(prodID).then((product)=>{
+        Product.findById(prodID).then((product)=>{
             res.render("admin/edit-products",{pageTitle:"Edit Product",product:product});
         })
         
