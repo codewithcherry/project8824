@@ -14,7 +14,8 @@ exports.postProductController = (req, res, next) => {
     const product = new Product({
         title: title,         // or just 'title' in shorthand
         description: description,
-        price: price
+        price: price,
+        userId:req.user._id
     });
 
     // Save the product to the database
