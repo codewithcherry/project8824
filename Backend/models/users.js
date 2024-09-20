@@ -1,3 +1,33 @@
+const mongoose=require("mongoose");
+const Schema=mongoose.Schema;
+
+const userSchema=new Schema({
+    username:{
+        type:String,
+        required:true
+    },
+    useremail:{
+        type:String,
+        required:true
+    },
+    cart:{
+        items:[{productId:
+            {
+                type:Schema.Types.ObjectId,
+                required:true
+            },
+            quantity:{
+                type:Number,
+                required:true
+            }
+        }]
+
+    }
+})
+
+const User=mongoose.model("User",userSchema);
+
+module.exports=User;
 // const {getDb}=require('../utils/db');
 // const mongodb=require('mongodb');
 
