@@ -26,8 +26,10 @@ exports.getShopHome=(req,res,next)=>{
 
 exports.getShopCart=(req,res,next)=>{
     console.log("Cart page is rendered");
-    req.user.getCart()
-    .then(products=>{
+    req.user.populate("cart.items.productId")
+    .then(user=>{
+        const products=user.cart.items;
+        console.log(products);
         res.render('shop/cart',{pageTitle:"my cart",products:products});
     })
     
