@@ -35,7 +35,7 @@ exports.getShopCart=(req,res,next)=>{
 
 exports.postShopCart=(req,res,next)=>{
     const prodID=req.body.productId;
-    Product.findProduct(prodID).then(product=>{
+    Product.findById(prodID).then(product=>{
         return req.user.addToCart(product)
                 .then(p=>{
                     console.log(p);
