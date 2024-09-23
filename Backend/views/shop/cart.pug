@@ -22,12 +22,12 @@ html(lang="en")
                   div
                     img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg", alt="productImage")
                   div
-                    h2.cart-item-title= product.title
-                    p.cart-item-price $ #{product.price}
+                    h2.cart-item-title= product.productId.title
+                    p.cart-item-price $ #{product.productId.price}
                     p.cart-item-qty quantity: 
                       span= product.quantity
                     form.removeCartItem(action=`/cart-remove-product`, method="post")
-                      input(type="hidden" name="productId" value=product._id)
+                      input(type="hidden" name="productId" value=product.productId._id)
                       button.remove-btn(type="submit") Remove
 
             .amount-container
