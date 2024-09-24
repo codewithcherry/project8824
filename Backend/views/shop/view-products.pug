@@ -9,19 +9,21 @@ html(lang="en")
   body
     block navbar
     .main-section
-      h1 products
+      h1.page-title All Products 
       .products-container
         if prods.length == 0
-          p No products to display 
+          p.no-products-message No products to display
         else
-          each product in prods
-            .product
-              img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
-              h2.product-title= product.title
-              p.product-des= product.description 
-              h3.price  $ #{product.price}
-              .change-btn-container
-                form.cart-form(action="/cart" method="post")
-                  input(type="hidden" name="productId" value=product._id)
-                  button.cart-button(type="submit") add to cart
-                a.cart-button(href='/product/' + product._id) details
+          .product-grid
+            each product in prods
+              .product-card
+                img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
+                .product-info
+                  h2.product-title= product.title
+                  p.product-description= product.description 
+                  h3.product-price $ #{product.price}
+                .product-actions
+                  form.cart-form(action="/cart" method="post")
+                    input(type="hidden" name="productId" value=product._id)
+                    button.cart-button(type="submit") Add to Cart
+                  a.details-button(href='/product/' + product._id) Details
