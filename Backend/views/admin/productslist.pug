@@ -6,23 +6,26 @@ html(lang="en")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title= pagetitle
-    link(rel="stylesheet" href="/main.css")
+    //- link(rel="stylesheet" href="/main.css")
+    link(rel="stylesheet" href="/adminproducts.css")
   body
     block navbar
     .main-section
-      h1 products
+      h1.page-title Products
       .products-container
         if prods.length == 0
-          p No products to display 
+          p.no-products-message No products to display
         else
-          each product in prods
-            .product
-              img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
-              h2.product-title= product.title
-              p.product-des= product.description 
-              h3.price  $ #{product.price}
-              .change-btn-container
-                a.edit-btn(href="/admin/edit-product/"+product._id+"?edit=true") edit
-                form(action="/admin/delete-product", method="POST")
+          .product-grid
+            each product in prods
+              .product-card
+                img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
+                .product-info
+                  h2.product-title= product.title
+                  p.product-description= product.description
+                  h3.product-price $ #{product.price}
+                .product-actions
+                  a.edit-btn(href="/admin/edit-product/"+product._id+"?edit=true") Edit
+                  form(action="/admin/delete-product", method="POST")
                     input(type="hidden" name="productID" value=product._id)
                     button.delete-btn(type="submit") Delete
