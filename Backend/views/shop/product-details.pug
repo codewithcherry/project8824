@@ -8,15 +8,17 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title= pageTitle
     link(rel="stylesheet" href="/navigation.css") 
-    link(rel="stylesheet" href="/main.css")
+    link(rel="stylesheet" href="/product-details.css")
   body
     block navbar
-    .product-container 
-        .product
-              img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
-              h2.product-title= productData.title
-              p.product-des= productData.description 
-              h3.price  $ #{productData.price}
-              form.cart-form(action="/cart" method="post")
-                input(type="hidden" name="productId" value=productData._id)
-                button.cart-button(type="submit") add to cart
+    .container
+      .product-details-container
+        .product-details-card
+          img.product-image(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg", alt="product image")
+          .product-info
+            h1.product-name= productData.title
+            p.product-description= productData.description
+            h2.product-price $ #{productData.price}
+            form.add-to-cart-form(action="/cart" method="post")
+              input(type="hidden" name="productId" value=productData._id)
+              button.add-to-cart-btn(type="submit") Add to Cart
