@@ -6,7 +6,7 @@ const User=require("../models/users");
 exports.getProdducts=(req,res,next)=>{
     console.log("view products page rendered");
     Product.find().then((products)=>{
-        return  res.render('shop/index',{pagetitle:"View Products",prods:products});
+        return  res.render('shop/index',{pagetitle:"View Products",activeLink:"view-products",prods:products});
     })
     .catch(err=>{
         return console.log(err);
@@ -17,7 +17,7 @@ exports.getProdducts=(req,res,next)=>{
 exports.getShopHome=(req,res,next)=>{
     console.log("shop home page rendered");
     Product.find().then((products)=>{
-        return  res.render('shop/index',{pagetitle:"View Products",prods:products});
+        return  res.render('shop/index',{pagetitle:"View Products",activeLink:"home",prods:products});
     })
     .catch(err=>{
         return console.log(err);
@@ -29,7 +29,7 @@ exports.getShopCart=(req,res,next)=>{
     req.user.populate("cart.items.productId")
     .then(user=>{
         const products=user.cart.items;
-        res.render('shop/cart',{pageTitle:"my cart",products:products});
+        res.render('shop/cart',{pageTitle:"my cart",activeLink:"cart",products:products});
     })
     
 }
@@ -59,7 +59,7 @@ exports.postDeleteCartProduct=(req,res,next)=>{
 
 exports.getOrders=(req,res,next)=>{
     console.log("Orders page rendered");
-    res.render('shop/orders',{pageTitle:"My Orders"})
+    res.render('shop/orders',{pageTitle:"My Orders",activeLink:"orders"})
 }
 
 exports.getShopCheckout=(req,res,next)=>{
@@ -69,7 +69,7 @@ exports.getShopCheckout=(req,res,next)=>{
 
 exports.getOrders=(req,res,next)=>{
     req.user.getOrders().then(result=>{
-        res.render("shop/orders",{pageTitle:"Orders",orders:result});
+        res.render("shop/orders",{pageTitle:"Orders",activeLink:"orders",orders:result});
     })
 }
 

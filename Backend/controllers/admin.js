@@ -3,7 +3,7 @@ const Product=require("../models/product");
 
 exports.addProductController=(req,res,next)=>{
     console.log("add product page rendered");
-    res.render("admin/add-product",{pagetitle:"Add Products"});
+    res.render("admin/add-product",{pagetitle:"Add Products",activeLink:"add-product"});
 }
 
 exports.postProductController = (req, res, next) => {
@@ -30,7 +30,7 @@ exports.postProductController = (req, res, next) => {
 
 exports.getadminProductslist=(req,res,next)=>{
     Product.find().then((products)=>{
-        return  res.render('admin/productslist',{pagetitle:"View Products",prods:products});
+        return  res.render('admin/productslist',{pagetitle:"View Products",activeLink:"productslist",prods:products});
     })
     .catch(err=>{
         return console.log(err);
