@@ -1,3 +1,4 @@
+/* Global resets and font settings */
 * {
     margin: 0;
     padding: 0;
@@ -10,52 +11,10 @@
     background-color: #f9f9f9;
   }
 
-.header-section{
-    padding: 1rem;
-    font-size: 1rem;
-    background-color: rgb(247, 123, 107);
-    margin: 0;
-}
-.nav-container{
-    display: flex;
-    align-items: center;
-    justify-content: start;
-}
-.list-container{
-    width: 100%;
-    padding: 0px;
-}
-.list{
-    width: 100%;
-    display: flex;
-    gap: 20px;
-    list-style-type: none;
-    text-decoration: none;
-    justify-content: space-around;
-    font-weight: 500;
-    color: rgb(255, 255, 255);
-}
-list-items{
-    margin:1rem 0rem;
-}
-.title{
-    font-size: 1rem;
-    font-weight: bold ;
-}
 
-.list a{
-    text-decoration: none;
-    color: white;
-}
-
-.list a:hover{
-    color:rgb(236, 47, 56);
-  
-
-}
 /* styling for the products display section */
 
-/* Global resets and font settings */
+
 
   
   .page-title {
