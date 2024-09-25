@@ -15,7 +15,7 @@ const app=express();
 app.set('view engine','pug');
 app.set('views',"./views");
 
-
+const authRouter=require("./routes/authRouter.js");
 const adminRouter=require('./routes/adminRoutes.js');
 const shopRouter=require("./routes/shopRoutes.js");
 
@@ -35,7 +35,7 @@ app.use((req,res,next)=>{
     })
 })
 
-
+app.use(authRouter);
 app.use(adminRouter);
 app.use(shopRouter);
 
