@@ -1,0 +1,24 @@
+doctype html
+include ../includes/navigation.pug
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= pageTitle
+    link(rel="stylesheet" href="/navigation.css")
+    link(rel="stylesheet" href="/login.css")
+  body
+    block navbar
+    .container
+        .login-container
+            .login-form
+                h2 Login
+                form(action="/login" method="post")
+                    .form-group
+                        label(for="email") Email
+                        input(type="email" id="email" name="email" placeholder="Enter your email" )
+                    .form-group
+                        label(for="password") Password
+                        input(type="password" id="password" name="password" placeholder="Enter your password" )
+                    .form-group
+                        button(type="submit" class="login-btn") Login
