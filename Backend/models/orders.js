@@ -16,7 +16,7 @@ const orderSchema=new Schema({
     },
     products:[
         {
-            product:{
+            productId:{
                 type:Object,
                 required:true
             },

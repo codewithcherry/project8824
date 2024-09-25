@@ -1,5 +1,5 @@
 const Product=require("../models/product");
-const Cart=require("../models/cart")
+const Order=require("../models/orders");
 
 const User=require("../models/users");
 
@@ -75,9 +75,31 @@ exports.getOrders=(req,res,next)=>{
 
 exports.postCartToOrders=(req,res,next)=>{
     console.log("checkoutpage after posting from cart");
-    req.user.addToOrders().then(result=>{
+
+    req.user.populate("cart.items.productId").then((user)=>{
+        const products = user.cart.items.map((item) => {
+            return {
+                productId: { ...item.productId._doc },  // Spread the full product details
+                quantity: item.quantity
+            };
+        });
+            const order=new Order({
+                user:{
+                    userId:req.user._id,
+                    name:req.user.username
+                },
+                products:products
+            })
+            return order.save();
+    })
+    .then(()=>{
         res.redirect("/orders")
     })
+
+  
+    // req.user.addToOrders().then(result=>{
+    //     res.redirect("/orders")
+    // })
 }
 
 exports.getProductDetails=(req,res,next)=>{
