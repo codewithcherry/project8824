@@ -67,11 +67,21 @@ exports.getShopCheckout=(req,res,next)=>{
     res.render("shop/checkout",{pageTitle:"Checkout Page"});
 }
 
-exports.getOrders=(req,res,next)=>{
-    req.user.getOrders().then(result=>{
-        res.render("shop/orders",{pageTitle:"Orders",activeLink:"orders",orders:result});
-    })
-}
+exports.getOrders = (req, res, next) => {
+    Order.find({ "user.userId": req.user._id })
+        .then((orders) => {
+            res.render("shop/orders", {
+                pageTitle: "Orders",
+                activeLink: "orders",
+                orders: orders // Send full orders array
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
+
 
 exports.postCartToOrders=(req,res,next)=>{
     console.log("checkoutpage after posting from cart");
@@ -98,10 +108,6 @@ exports.postCartToOrders=(req,res,next)=>{
         res.redirect("/orders")
     })
 
-  
-    // req.user.addToOrders().then(result=>{
-    //     res.redirect("/orders")
-    // })
 }
 
 exports.getProductDetails=(req,res,next)=>{
