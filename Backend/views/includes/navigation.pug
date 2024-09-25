@@ -7,17 +7,18 @@ block navbar
         span
         span
       ul.nav-list
-        li.nav-item
-          a.nav-link(href="/home" class=activeLink === 'home' ? 'active' : '') Home
-        li.nav-item
-          a.nav-link(href="/add-product" class=activeLink === 'add-product' ? 'active' : '') Add Products
+        //- li.nav-item
+        //-   a.nav-link(href="/home" class=activeLink === 'home' ? 'active' : '') Home
         li.nav-item
           a.nav-link(href="/view-products" class=activeLink === 'view-products' ? 'active' : '') Products
-        li.nav-item
-          a.nav-link(href="/productslist" class=activeLink === 'productslist' ? 'active' : '') Admin Products
         li.nav-item
           a.nav-link(href="/cart" class=activeLink === 'cart' ? 'active' : '') Cart
         li.nav-item
           a.nav-link(href="/orders" class=activeLink === 'orders' ? 'active' : '') Orders
+        if isAuthenticated
+          li.nav-item
+            a.nav-link(href="/add-product" class=activeLink === 'add-product' ? 'active' : '') Add Products
+          li.nav-item
+            a.nav-link(href="/productslist" class=activeLink === 'productslist' ? 'active' : '') Admin Products
         li.nav-item
           a.nav-link(href="/login" class=activeLink === 'login' ? 'active' : '') Login
