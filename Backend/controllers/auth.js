@@ -13,3 +13,8 @@ exports.postLogin=(req,res,next)=>{
         );
     res.redirect("/");
 }
+
+exports.getLogout=(req,res,next)=>{
+    res.clearCookie('authenticate');
+    res.redirect("/");
+}
