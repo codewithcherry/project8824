@@ -6,7 +6,12 @@ const User=require("../models/users");
 exports.getProdducts=(req,res,next)=>{
     console.log("view products page rendered");
     Product.find().then((products)=>{
-        return  res.render('shop/index',{pagetitle:"View Products",activeLink:"view-products",prods:products});
+        return  res.render('shop/index',{
+            pagetitle:"View Products",
+            activeLink:"view-products",
+            prods:products,
+            isAuthenticated:req.cookies.authenticate
+        });
     })
     .catch(err=>{
         return console.log(err);
@@ -17,7 +22,12 @@ exports.getProdducts=(req,res,next)=>{
 exports.getShopHome=(req,res,next)=>{
     console.log("shop home page rendered");
     Product.find().then((products)=>{
-        return  res.render('shop/index',{pagetitle:"View Products",activeLink:"home",prods:products});
+        return  res.render('shop/index',
+            {pagetitle:"View Products",
+                activeLink:"home",
+                prods:products,
+                isAuthenticated:req.cookies.authenticate
+            });
     })
     .catch(err=>{
         return console.log(err);
@@ -29,7 +39,12 @@ exports.getShopCart=(req,res,next)=>{
     req.user.populate("cart.items.productId")
     .then(user=>{
         const products=user.cart.items;
-        res.render('shop/cart',{pageTitle:"my cart",activeLink:"cart",products:products});
+        res.render('shop/cart',
+            {   pageTitle:"my cart",
+                activeLink:"cart",
+                products:products,
+                isAuthenticated:req.cookies.authenticate
+            });
     })
     
 }
@@ -59,12 +74,19 @@ exports.postDeleteCartProduct=(req,res,next)=>{
 
 exports.getOrders=(req,res,next)=>{
     console.log("Orders page rendered");
-    res.render('shop/orders',{pageTitle:"My Orders",activeLink:"orders"})
+    res.render('shop/orders',
+        {   pageTitle:"My Orders",
+            activeLink:"orders",
+            isAuthenticated:req.cookies.authenticate
+        })
 }
 
 exports.getShopCheckout=(req,res,next)=>{
     console.log("checkout page rendered");
-    res.render("shop/checkout",{pageTitle:"Checkout Page"});
+    res.render("shop/checkout",
+        {   pageTitle:"Checkout Page",
+            isAuthenticated:req.cookies.authenticate
+        });
 }
 
 exports.getOrders = (req, res, next) => {
@@ -73,7 +95,8 @@ exports.getOrders = (req, res, next) => {
             res.render("shop/orders", {
                 pageTitle: "Orders",
                 activeLink: "orders",
-                orders: orders // Send full orders array
+                orders: orders, // Send full orders array
+                isAuthenticated:req.cookies.authenticate
             });
         })
         .catch((err) => {
@@ -113,7 +136,11 @@ exports.postCartToOrders=(req,res,next)=>{
 exports.getProductDetails=(req,res,next)=>{
     const prodId=req.params.productId;
     Product.findById(prodId).then(product=>{
-        res.render("shop/product-details",{pageTitle:"product details",productData:product});
+        res.render("shop/product-details",
+            {   pageTitle:"product details",
+                productData:product,
+                isAuthenticated:req.cookies.authenticate
+            });
     });
     
     
