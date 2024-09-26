@@ -6,5 +6,10 @@ exports.getLogin=(req,res,next)=>{
 }
 
 exports.postLogin=(req,res,next)=>{
+    res.cookie('authenticate', 'true', {
+         maxAge: 3600000,
+         httpOnly: true 
+        }
+        );
     res.redirect("/");
 }
