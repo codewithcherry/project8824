@@ -20,5 +20,8 @@ block navbar
             a.nav-link(href="/add-product" class=activeLink === 'add-product' ? 'active' : '') Add Products
           li.nav-item
             a.nav-link(href="/productslist" class=activeLink === 'productslist' ? 'active' : '') Admin Products
-        li.nav-item
-          a.nav-link(href="/login" class=activeLink === 'login' ? 'active' : '') Login
+          li.nav-item
+            a.nav-link(href="/logout" class=activeLink === 'logout' ? 'active' : '') logout
+        else
+          li.nav-item
+            a.nav-link(href="/login" class=activeLink === 'login' ? 'active' : '') Login
