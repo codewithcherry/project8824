@@ -1,14 +1,15 @@
 //- this is index for base shop view at shop level
-
 doctype html
 include ../includes/navigation.pug
 html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title= pagetitle
+    title= pageTitle
     link(rel="stylesheet" href="/navigation.css")
     link(rel="stylesheet" href="/main.css")
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+    link(rel="stylesheet" href="/modal.css")
   body
     block navbar
     .main-section
@@ -30,3 +31,38 @@ html(lang="en")
                     input(type="hidden" name="productId" value=product._id)
                     button.cart-button(type="submit") Add to Cart
                   a.details-button(href='/product/' + product._id) Details
+
+    //- Modal structure for login alert
+    .modal#myModal
+      .modal-content
+        span.close(&times; onclick='closePopup()')
+        p Login to your account to add the product to your cart
+
+    //- Script to handle popup behavior
+    script.
+      function showPopup() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = 'block';
+        
+        setTimeout(() => {
+          closePopup();
+        }, 3000); // Close after 3 seconds
+      }
+
+      function closePopup() {
+        var modal = document.getElementById('myModal');
+        modal.style.display = 'none';
+      }
+
+      // Check if the URL has the query parameter to show the modal
+      if (window.location.search.includes("showModal=true")) {
+        showPopup();
+      }
+
+      // Close the modal if the user clicks anywhere outside of it
+      window.onclick = function(event) {
+        var modal = document.getElementById('myModal');
+        if (event.target === modal) {
+          closePopup();
+        }
+      }
