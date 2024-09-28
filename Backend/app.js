@@ -9,7 +9,8 @@ const {uri}=require("./utils/dbcredentials.js")
 const bodyParser=require("body-parser");
 const _404ErrorController=require("./controllers/404controller.js")
 const User=require("./models/users.js");
-const cookieParser=require("cookie-parser");
+// const cookieParser=require("cookie-parser");
+const session=require('express-session');
 
 const app=express();
 
@@ -24,7 +25,15 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,"public")));
 
 //setup cookie parser through out the routes
-app.use(cookieParser());
+// app.use(cookieParser());
+//setup and configure session
+app.use(session(
+    {
+        secret: 'your-secret-key', // Use a strong secret in production
+        resave: false,
+        saveUninitialized: true
+    }
+))
 
 app.use((req,res,next)=>{
     User.findById("66f194792f116614db11c787")
