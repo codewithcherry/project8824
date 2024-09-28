@@ -10,7 +10,7 @@ exports.getProdducts=(req,res,next)=>{
             pagetitle:"View Products",
             activeLink:"view-products",
             prods:products,
-            isAuthenticated:req.cookies.authenticate
+            isAuthenticated:req.session.authenticate
         });
     })
     .catch(err=>{
@@ -26,7 +26,7 @@ exports.getShopHome=(req,res,next)=>{
             {pagetitle:"View Products",
                 activeLink:"home",
                 prods:products,
-                isAuthenticated:req.cookies.authenticate
+                isAuthenticated:req.session.authenticate
             });
     })
     .catch(err=>{
@@ -43,7 +43,7 @@ exports.getShopCart=(req,res,next)=>{
             {   pageTitle:"my cart",
                 activeLink:"cart",
                 products:products,
-                isAuthenticated:req.cookies.authenticate
+                isAuthenticated:req.session.authenticate
             });
     })
     
@@ -77,7 +77,7 @@ exports.getOrders=(req,res,next)=>{
     res.render('shop/orders',
         {   pageTitle:"My Orders",
             activeLink:"orders",
-            isAuthenticated:req.cookies.authenticate
+            isAuthenticated:req.session.authenticate
         })
 }
 
@@ -85,7 +85,7 @@ exports.getShopCheckout=(req,res,next)=>{
     console.log("checkout page rendered");
     res.render("shop/checkout",
         {   pageTitle:"Checkout Page",
-            isAuthenticated:req.cookies.authenticate
+            isAuthenticated:req.session.authenticate
         });
 }
 
@@ -96,7 +96,7 @@ exports.getOrders = (req, res, next) => {
                 pageTitle: "Orders",
                 activeLink: "orders",
                 orders: orders, // Send full orders array
-                isAuthenticated:req.cookies.authenticate
+                isAuthenticated:req.session.authenticate
             });
         })
         .catch((err) => {
@@ -139,7 +139,7 @@ exports.getProductDetails=(req,res,next)=>{
         res.render("shop/product-details",
             {   pageTitle:"product details",
                 productData:product,
-                isAuthenticated:req.cookies.authenticate
+                isAuthenticated:req.session.authenticate
             });
     });
     

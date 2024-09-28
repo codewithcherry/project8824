@@ -6,7 +6,7 @@ exports.addProductController=(req,res,next)=>{
     res.render("admin/add-product",
         {   pagetitle:"Add Products",
             activeLink:"add-product",
-            isAuthenticated:req.cookies.authenticate
+            isAuthenticated:req.session.authenticate
         });
 }
 
@@ -38,7 +38,7 @@ exports.getadminProductslist=(req,res,next)=>{
             {   pagetitle:"View Products",
                 activeLink:"productslist",
                 prods:products,
-                isAuthenticated:req.cookies.authenticate
+                isAuthenticated:req.session.authenticate
             });
     })
     .catch(err=>{
@@ -58,7 +58,7 @@ exports.getEditProduct=(req,res,next)=>{
             res.render("admin/edit-products",
                 {   pageTitle:"Edit Product",
                     product:product,
-                    isAuthenticated:req.cookies.authenticate
+                    isAuthenticated:req.session.authenticate
                 });
         })
         
