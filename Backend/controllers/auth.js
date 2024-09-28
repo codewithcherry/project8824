@@ -11,6 +11,9 @@ exports.postLogin=(req,res,next)=>{
          httpOnly: true 
         }
         );
+
+    req.session.authenticate=true;
+    console.log(req.session)
     res.redirect("/");
 }
 
