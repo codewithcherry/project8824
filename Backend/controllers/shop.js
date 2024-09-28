@@ -50,17 +50,21 @@ exports.getShopCart=(req,res,next)=>{
 }
 
 exports.postShopCart=(req,res,next)=>{
-    const prodID=req.body.productId;
-    Product.findById(prodID).then(product=>{
-        return req.user.addToCart(product)
-                .then(p=>{
-                    console.log(p);
-                    res.redirect("/cart");
-                })
-                .catch(err=>console.log(err));
-    })
-    
-    
+    if(!req.user){
+          // Redirect with a query parameter to show the modal
+          return res.redirect("/?showModal=true");
+    }
+    else{
+        const prodID=req.body.productId;
+        Product.findById(prodID).then(product=>{
+            return req.user.addToCart(product)
+                    .then(p=>{
+                        console.log(p);
+                        res.redirect("/cart");
+                    })
+                    .catch(err=>console.log(err));
+        })
+    }  
 }
 
 exports.postDeleteCartProduct=(req,res,next)=>{
