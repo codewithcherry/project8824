@@ -31,11 +31,11 @@ exports.getShopHome=(req,res,next)=>{
     })
     .catch(err=>{
         return console.log(err);
-    })
+    })  
 }
 
 exports.getShopCart=(req,res,next)=>{
-    console.log("Cart page is rendered");
+    console.log("Cart page is rendered"); 
     req.user.populate("cart.items.productId")
     .then(user=>{
         const products=user.cart.items;
