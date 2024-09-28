@@ -11,6 +11,14 @@ const _404ErrorController=require("./controllers/404controller.js")
 const User=require("./models/users.js");
 const cookieParser=require("cookie-parser");
 const session=require('express-session');
+const mongoStore=require("connect-mongo");
+
+const store= mongoStore.create({
+        mongoUrl: uri,  // MongoDB connection URL
+        collectionName: 'sessions',  // Collection where session data will be stored
+        ttl: 14 * 24 * 60 * 60  // Time-to-live for sessions in seconds (14 days)
+    })
+
 
 const app=express();
 
@@ -31,7 +39,12 @@ app.use(session(
     {
         secret: 'your-secret-key', // Use a strong secret in production
         resave: false,
-        saveUninitialized: true
+        saveUninitialized: true,
+        store:store,
+        cookie:{
+            maxAge: 1000 * 60 * 60 * 24 * 14, 
+        }
+
     }
 ))
 
