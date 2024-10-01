@@ -83,19 +83,19 @@ app.use(_404ErrorController.error404Controller);
 
 mongoose.connect(uri).then(()=>{
     console.log("server started with mongodb connection")
-    User.findOne().then(user=>{
-        if(!user){
-            const user=new User({
-                username:"demoUser",
-                useremail:"demo@test.com",
-                cart:{items:[]}
-            })
-            user.save()
-            .then(result=>{
-                console.log("user created");
-            });
-        }
-    })
+    // User.findOne().then(user=>{
+    //     if(!user){
+    //         const user=new User({
+    //             username:"demoUser",
+    //             useremail:"demo@test.com",
+    //             cart:{items:[]}
+    //         })
+    //         user.save()
+    //         .then(result=>{
+    //             console.log("user created");
+    //         });
+    //     }
+    // })
     app.listen(3000);
 })
 .catch((err)=>{
