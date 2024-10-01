@@ -1,0 +1,29 @@
+//-  this is to code the signup pug file for the myshop app
+
+doctype html
+include ../includes/navigation.pug
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= pageTitle
+    link(rel="stylesheet" href="/navigation.css")
+    link(rel="stylesheet" href="/login.css")
+  body
+    block navbar
+    .container
+        .login-container
+            .login-form
+                h2 Signup
+                form(action="/signup" method="post")
+                    .form-group
+                        label(for="email") Email
+                        input(type="email" id="email" name="email" placeholder="Enter your email" required)
+                    .form-group
+                        label(for="password") Password
+                        input(type="password" id="password" name="password" placeholder="Enter your password" required)
+                    .form-group
+                        label(for="confirm-password") Confirm Password
+                        input(type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm your password" required)
+                    .form-group
+                        button(type="submit" class="login-btn") Signup
