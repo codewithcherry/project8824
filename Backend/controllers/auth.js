@@ -1,5 +1,14 @@
 const User=require("../models/users");
 
+
+exports.getSignup=(req,res,next)=>{
+    res.render("auth/signup",{
+        pageTitle:"Signup Page",
+        activeLink:"signup",
+        isAuthenticated:req.session.authenticate
+    })
+}
+
 exports.getLogin=(req,res,next)=>{
     res.render('auth/login',{
         pageTitle:"Login Page",
