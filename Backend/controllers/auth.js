@@ -9,6 +9,34 @@ exports.getSignup=(req,res,next)=>{
     })
 }
 
+exports.postSignup=(req,res,next)=>{
+    userEmail=req.body.email,
+    userPassword=req.body.password,
+    userConfirmPassword=req.body.confirmPassword
+
+    User.findOne({email:userEmail})
+    .then( userDoc=>{
+        if(userDoc){
+            res.redirect("/login");
+        }
+        else{
+            const user=new User({
+                username:userEmail.slice(0,userEmail.length-10),
+                useremail:userEmail,
+                password:userPassword,
+                cart:{items:[]}
+            })
+            return user.save();
+        }        
+    })
+    .then(result=>{
+        res.redirect("/login")
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
 exports.getLogin=(req,res,next)=>{
     res.render('auth/login',{
         pageTitle:"Login Page",
