@@ -17,7 +17,7 @@ html(lang="en")
         h1.form-title Add Product Details
       .form-wrapper
         .form-container
-          form.product-form(action="/view-products" method="post")
+          form.product-form(action="/productslist" method="post")
             .form-item
               label(for="title") Product Title
               input#title(type="text" name="title" value=product.title placeholder="Enter product title" required)
@@ -29,4 +29,5 @@ html(lang="en")
               input#price(type="number" step="0.01" name="price" value=product.price placeholder="Enter price" required)
             .form-actions
               input(type="hidden" name="_csrf" value=csrfToken)
+              input(type="hidden" name="productId" value=product._id)
               button.submit-button(type="submit") Update

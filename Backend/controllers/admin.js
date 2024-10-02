@@ -67,7 +67,7 @@ exports.getEditProduct=(req,res,next)=>{
 }
 
 exports.postEditProductDetails=(req,res,next)=>{
-    const prodID=req.body._id;
+    const prodID=req.body.productId;
     const updatedTitle=req.body.title;
     const updatedDescription=req.body.description;
     const updatedPrice=req.body.price;
