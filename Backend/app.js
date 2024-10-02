@@ -13,6 +13,8 @@ const User=require("./models/users.js");
 const session=require('express-session');
 const mongoStore=require("connect-mongo");
 
+const csrfProtection=require("csurf");
+
 const store= mongoStore.create({
         mongoUrl: uri,  // MongoDB connection URL
         collectionName: 'sessions',  // Collection where session data will be stored
@@ -39,7 +41,7 @@ app.use(session(
     {
         secret: 'your-secret-key', // Use a strong secret in production
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         store:store,
         cookie:{
             maxAge: 1000 * 60 * 60 * 24 * 14, 
@@ -47,6 +49,14 @@ app.use(session(
 
     }
 ))
+
+app.use(csrfProtection())
+
+// Pass CSRF token to every view (optional but recommended)
+app.use((req, res, next) => {
+  res.locals.csrfToken = req.csrfToken();  // This makes the token available in views
+  next();
+});
 
 app.use((req, res, next) => {
     if (req.session.user) {
