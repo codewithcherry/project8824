@@ -20,5 +20,6 @@ html(lang="en")
             p.product-description= productData.description
             h2.product-price $ #{productData.price}
             form.add-to-cart-form(action="/cart" method="post")
+              input(type="hidden" name="_csrf" value=csrfToken)
               input(type="hidden" name="productId" value=productData._id)
               button.add-to-cart-btn(type="submit") Add to Cart

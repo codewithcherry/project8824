@@ -28,6 +28,7 @@ html(lang="en")
                       span= product.quantity
                     form.remove-cart-item(action="/cart-remove-product", method="post")
                       input(type="hidden" name="productId" value=product.productId._id)
+                      input(type="hidden" name="_csrf" value=csrfToken)
                       button.remove-btn(type="submit") Remove
             .cart-summary
               .summary-box
@@ -41,6 +42,7 @@ html(lang="en")
                   span.cart-final $00
               .checkout-container
                 form(action="/orders", method="post")
+                  input(type="hidden" name="_csrf" value=csrfToken)
                   button.checkout-btn(type="submit") Checkout
           else
             p.cart-empty No products in your cart

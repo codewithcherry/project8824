@@ -26,4 +26,5 @@ html(lang="en")
                         label(for="confirm-password") Confirm Password
                         input(type="password" id="confirm-password" name="confirmPassword" placeholder="Confirm your password" required)
                     .form-group
+                        input(type="hidden" name="_csrf" value=csrfToken)
                         button(type="submit" class="login-btn") Signup
