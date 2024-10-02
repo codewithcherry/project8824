@@ -49,29 +49,45 @@ exports.getLogin=(req,res,next)=>{
     })
 }
 
-exports.postLogin=(req,res,next)=>{
-    // res.cookie('authenticate', 'true', {
-    //      maxAge: 3600000,
-    //      httpOnly: true 
-    //     }
-    //     );
+exports.postLogin = (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
 
-    User.findById("66f194792f116614db11c787")
-    .then(user=>{
-        req.session.authenticate=true;
-        req.session.user=user;
-        req.session.save((err) => {
-            if (err) {
-              console.error('Session save error:', err);
-              return res.redirect('/login'); // Redirect to login in case of error
+    User.findOne({ useremail: email })
+        .then(user => {
+            if (!user) {
+                console.log('User not found');
+                return res.redirect("/login");  // Return here to stop further execution
             }
-            res.redirect("/"); // Redirect after session is successfully saved
-          });
-    })
-    .catch(err=>{
-        console.log(err);
-    })
-}
+
+            // Compare the password
+            return bcrypt.compare(password, user.password)
+                .then(ismatch => {
+                    if (ismatch) {
+                        console.log("Password matched");
+                        req.session.authenticate = true;
+                        req.session.user = user;
+
+                        // Save session and redirect
+                        req.session.save((err) => {
+                            if (err) {
+                                console.error('Session save error:', err);
+                                return res.redirect('/login');  // Return to stop further execution
+                            }
+                            return res.redirect("/");  // Return here to stop further execution
+                        });
+                    } else {
+                        console.log("Password does not match");
+                        return res.redirect('/login');  // Return here to stop further execution
+                    }
+                });
+        })
+        .catch(err => {
+            console.error('Error in login process:', err);
+            res.status(500).send('Internal Server Error');
+        });
+};
+
 
 exports.getLogout=(req,res,next)=>{
     // res.clearCookie('authenticate');
