@@ -9,6 +9,9 @@ html(lang="en")
     link(rel="stylesheet" href="/login.css")
   body
     block navbar
+    if errorMessage
+            .error-message 
+                p= errorMessage
     .container
         .login-container
             .login-form
