@@ -2,10 +2,16 @@ const User=require("../models/users");
 const bcrypt=require("bcryptjs");
 
 exports.getSignup=(req,res,next)=>{
+    let Message=req.flash("error")
+    let errorMessage=null
+    if(Message.length>0){
+        errorMessage=Message[0]
+    }
     res.render("auth/signup",{
         pageTitle:"Signup Page",
         activeLink:"signup",
-        isAuthenticated:req.session.authenticate
+        isAuthenticated:req.session.authenticate,
+        errorMessage:errorMessage
     })
 }
 
@@ -14,10 +20,11 @@ exports.postSignup=(req,res,next)=>{
     userPassword=req.body.password,
     userConfirmPassword=req.body.confirmPassword
 
-    User.findOne({email:userEmail})
+    User.findOne({useremail:userEmail})
     .then( userDoc=>{
         if(userDoc){
-            res.redirect("/login");
+            req.flash('error',"User exists with same email address");
+            res.redirect("/signup");
         }
         else{
             return bcrypt
@@ -32,6 +39,7 @@ exports.postSignup=(req,res,next)=>{
                 return user.save();
             })
             .then(result=>{
+                req.flash("error","Account Created Successfully,Login using credentials");
                 res.redirect("/login")
             })
             
@@ -43,9 +51,15 @@ exports.postSignup=(req,res,next)=>{
 }
 
 exports.getLogin=(req,res,next)=>{
+    let Message=req.flash("error")
+    let errorMessage=null
+    if(Message.length>0){
+        errorMessage=Message[0]
+    }
     res.render('auth/login',{
         pageTitle:"Login Page",
-        activeLink:"login"
+        activeLink:"login",
+        errorMessage:errorMessage
     })
 }
 
@@ -56,7 +70,7 @@ exports.postLogin = (req, res, next) => {
     User.findOne({ useremail: email })
         .then(user => {
             if (!user) {
-                console.log('User not found');
+                req.flash("error",'User not found');
                 return res.redirect("/login");  // Return here to stop further execution
             }
 
@@ -64,7 +78,7 @@ exports.postLogin = (req, res, next) => {
             return bcrypt.compare(password, user.password)
                 .then(ismatch => {
                     if (ismatch) {
-                        console.log("Password matched");
+                        req.flash("error","Password matched");
                         req.session.authenticate = true;
                         req.session.user = user;
 
@@ -77,7 +91,7 @@ exports.postLogin = (req, res, next) => {
                             return res.redirect("/");  // Return here to stop further execution
                         });
                     } else {
-                        console.log("Password does not match");
+                        req.flash("error","Password does not match");
                         return res.redirect('/login');  // Return here to stop further execution
                     }
                 });
