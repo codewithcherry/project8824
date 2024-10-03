@@ -15,6 +15,8 @@ const mongoStore=require("connect-mongo");
 
 const csrfProtection=require("csurf");
 
+const flash=require("connect-flash");
+
 const store= mongoStore.create({
         mongoUrl: uri,  // MongoDB connection URL
         collectionName: 'sessions',  // Collection where session data will be stored
@@ -51,6 +53,7 @@ app.use(session(
 ))
 
 app.use(csrfProtection())
+app.use(flash());
 
 // Pass CSRF token to every view (optional but recommended)
 app.use((req, res, next) => {
