@@ -108,3 +108,17 @@ exports.getLogout=(req,res,next)=>{
     req.session.destroy();
     res.redirect("/");
 }
+
+exports.getChangePassword=(req,res,next)=>{
+    console.log("change-password page rendered");
+    let Message=req.flash("error")
+    let errorMessage=null
+    if(Message.length>0){
+        errorMessage=Message[0]
+    }
+    res.render('auth/changePassword',{
+        pageTitle:"Login Page",
+        activeLink:"login",
+        errorMessage:errorMessage
+    })
+}
