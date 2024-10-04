@@ -165,7 +165,7 @@ exports.postResetPassword = (req, res, next) => {
           // Save the user with the new fields
           return user.save().then(() => {
             // Send an email with the reset link
-            const resetLink = `http://localhost:3000/reset-password?token=${token}`;
+            const resetLink = `http://localhost:3000/new-password?token=${token}`;
             sendEmail(
               user.useremail,
               'Password Reset',
