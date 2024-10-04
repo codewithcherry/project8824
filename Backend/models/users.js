@@ -29,11 +29,10 @@ const userSchema=new Schema({
 
     },
     resetToken:{
-        type:String,
-        required:true
+        type:String
     },
     tokenExpiryTime:{
-        type:Date,
+        type:Date
         
     }
 })
