@@ -165,7 +165,7 @@ exports.postResetPassword = (req, res, next) => {
           // Save the user with the new fields
           return user.save().then(() => {
             // Send an email with the reset link
-            const resetLink = `http://localhost:3000/new-password/token=${token}`;
+            const resetLink = `http://localhost:3000/new-password/${token}`;
             sendEmail(
               user.useremail,
               'Password Reset',
@@ -183,7 +183,7 @@ exports.postResetPassword = (req, res, next) => {
   };
 
   exports.getNewPassword=(req,res,next)=>{
-    const userEmail = req.body.email;
+    const token = req.params.token;
     let Message=req.flash("error")
     let errorMessage=null
     if(Message.length>0){
@@ -192,6 +192,44 @@ exports.postResetPassword = (req, res, next) => {
     res.render("auth/newPassword",{
         pageTitle:"New Password",
         activeLink:"login",
-        errorMessage:errorMessage
+        errorMessage:errorMessage,
+        token:token
     })
   }
+
+  exports.postNewPassword = (req, res, next) => {
+    const token = req.params.token;
+    const newPassword = req.body.password;
+    let Message = req.flash("error");
+    let errorMessage = null;
+    if (Message.length > 0) {
+      errorMessage = Message[0];
+    }
+  
+    User.findOne({
+      resetToken: token,
+      tokenExpiryTime: { $gt: Date.now() } // Check if the token is still valid
+    })
+      .then(user => {
+        if (!user) {
+          req.flash("error", "Invalid or expired token. Please try again.");
+          return res.redirect("/change-password");
+        }
+        return bcrypt.hash(newPassword, 12).then(hashedPassword => {
+          user.password = hashedPassword;
+          user.resetToken = null;
+          user.tokenExpiryTime = null;
+          return user.save();
+        });
+      })
+      .then(() => {
+        req.flash("error", "Password updated successfully. You can now log in.");
+        res.redirect('/login');
+      })
+      .catch(err => {
+        console.log("Error:", err);
+        req.flash("error", "Something went wrong. Please try again later.");
+        res.redirect("/change-password");
+      });
+  };
+  
