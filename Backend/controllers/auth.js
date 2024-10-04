@@ -1,6 +1,7 @@
 const User=require("../models/users");
 const bcrypt=require("bcryptjs");
-const sendEmail=require("../services/mailer")
+const sendEmail=require("../services/mailer");
+const crypto=require('crypto');
 
 exports.getSignup=(req,res,next)=>{
     let Message=req.flash("error")
@@ -132,3 +133,51 @@ exports.getChangePassword=(req,res,next)=>{
         errorMessage:errorMessage
     })
 }
+
+exports.postResetPassword = (req, res, next) => {
+    const userEmail = req.body.email;
+    let Message=req.flash("error")
+    let errorMessage=null
+    if(Message.length>0){
+        errorMessage=Message[0]
+    }
+    // Find the user by email
+    User.findOne({ useremail: userEmail })
+      .then(user => {
+        if (!user) {
+          req.flash('error', 'No account with that email found.');
+          return res.redirect('/change-password');
+        }
+  
+        // Generate a reset token
+        crypto.randomBytes(32, (err, buffer) => {
+          if (err) {
+            console.log(err);
+            return res.redirect('/change-password');
+          }
+  
+          const token = buffer.toString('hex'); // Token in hexadecimal format
+  
+          // Set reset token and expiry time (e.g., 1 hour from now)
+          user.resetToken = token;
+          user.tokenExpiryTime = Date.now() + 3600000; // 1 hour in milliseconds
+  
+          // Save the user with the new fields
+          return user.save().then(() => {
+            // Send an email with the reset link
+            const resetLink = `http://localhost:3000/reset-password?token=${token}`;
+            sendEmail(
+              user.useremail,
+              'Password Reset',
+              `<p>You requested a password reset</p>
+               <p>Click this <a href="${resetLink}">link</a> to set a new password.</p>`
+            );
+            req.flash('error', 'A password reset link has been sent to your email.');
+            res.redirect('/login');
+          });
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
