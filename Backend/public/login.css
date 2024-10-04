@@ -81,6 +81,13 @@
     text-align: center;
     color: white;
   }
+
+  .change-password{
+    text-decoration: none;
+    margin: 0 1rem;
+    color: blue;
+    cursor: pointer;
+  }
   
   
   /* Responsive Design */
