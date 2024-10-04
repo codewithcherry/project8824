@@ -128,7 +128,7 @@ exports.getChangePassword=(req,res,next)=>{
         errorMessage=Message[0]
     }
     res.render('auth/changePassword',{
-        pageTitle:"Login Page",
+        pageTitle:"Change Password",
         activeLink:"login",
         errorMessage:errorMessage
     })
@@ -165,7 +165,7 @@ exports.postResetPassword = (req, res, next) => {
           // Save the user with the new fields
           return user.save().then(() => {
             // Send an email with the reset link
-            const resetLink = `http://localhost:3000/new-password?token=${token}`;
+            const resetLink = `http://localhost:3000/new-password/token=${token}`;
             sendEmail(
               user.useremail,
               'Password Reset',
@@ -181,3 +181,17 @@ exports.postResetPassword = (req, res, next) => {
         console.log(err);
       });
   };
+
+  exports.getNewPassword=(req,res,next)=>{
+    const userEmail = req.body.email;
+    let Message=req.flash("error")
+    let errorMessage=null
+    if(Message.length>0){
+        errorMessage=Message[0]
+    }
+    res.render("auth/newPassword",{
+        pageTitle:"New Password",
+        activeLink:"login",
+        errorMessage:errorMessage
+    })
+  }
