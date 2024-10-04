@@ -1,5 +1,6 @@
 const User=require("../models/users");
 const bcrypt=require("bcryptjs");
+const sendEmail=require("../services/mailer")
 
 exports.getSignup=(req,res,next)=>{
     let Message=req.flash("error")
@@ -39,8 +40,17 @@ exports.postSignup=(req,res,next)=>{
                 return user.save();
             })
             .then(result=>{
-                req.flash("error","Account Created Successfully,Login using credentials");
+                
                 res.redirect("/login")
+
+                // Sending welcome email
+                sendEmail(
+                    userEmail,
+                    "Welcome to My Shop!",
+                    "<h1>Welcome to My Shop!</h1><p>We’re excited to have you on board. Enjoy shopping with us!</p><p>Regards, <br> My Shop Team</p>"
+                );
+
+                req.flash("error","Account Created Successfully,Login using credentials");
             })
             
         }        
