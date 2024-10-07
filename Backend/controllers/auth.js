@@ -3,6 +3,8 @@ const bcrypt=require("bcryptjs");
 const sendEmail=require("../services/mailer");
 const crypto=require('crypto');
 
+const {validationResult}=require("express-validator");
+
 exports.getSignup=(req,res,next)=>{
     let Message=req.flash("error")
     let errorMessage=null
@@ -18,10 +20,17 @@ exports.getSignup=(req,res,next)=>{
 }
 
 exports.postSignup=(req,res,next)=>{
-    userEmail=req.body.email,
-    userPassword=req.body.password,
-    userConfirmPassword=req.body.confirmPassword
-
+    userEmail=req.body.email;
+    userPassword=req.body.password;   
+    let errors=validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).render("auth/signup",{
+        pageTitle:"Signup Page",
+        activeLink:"signup",
+        isAuthenticated:req.session.authenticate,
+        errorMessage:errors.array()[0].msg
+        })
+    }
     User.findOne({useremail:userEmail})
     .then( userDoc=>{
         if(userDoc){
