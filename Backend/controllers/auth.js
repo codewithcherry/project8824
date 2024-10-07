@@ -15,20 +15,31 @@ exports.getSignup=(req,res,next)=>{
         pageTitle:"Signup Page",
         activeLink:"signup",
         isAuthenticated:req.session.authenticate,
-        errorMessage:errorMessage
+        errorMessage:errorMessage,
+        oldInput:{
+            email:"",
+            password:"",
+            confirmPassword:""
+        }
     })
 }
 
 exports.postSignup=(req,res,next)=>{
     userEmail=req.body.email;
-    userPassword=req.body.password;   
+    userPassword=req.body.password;  
+    userConfirmPassword=req.body.confirmPassword 
     let errors=validationResult(req);
     if(!errors.isEmpty()){
         return res.status(400).render("auth/signup",{
         pageTitle:"Signup Page",
         activeLink:"signup",
         isAuthenticated:req.session.authenticate,
-        errorMessage:errors.array()[0].msg
+        errorMessage:errors.array()[0].msg,
+        oldInput:{
+            email:userEmail,
+            password:userPassword,
+            confirmPassword:userConfirmPassword
+        }
         })
     }
     User.findOne({useremail:userEmail})
