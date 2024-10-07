@@ -95,6 +95,23 @@ exports.postEditProductDetails=(req,res,next)=>{
     const updatedDescription=req.body.description;
     const updatedPrice=req.body.price;
 
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+      return  res.status(400).render("admin/edit-products",
+            {   pagetitle:"Edit Products",
+                activeLink:"add-product",
+                isAuthenticated:req.session.authenticate,
+                errorMessage:errors.array()[0].msg,
+                product:{
+                    title:updatedTitle,
+                    description:updatedDescription,
+                    price:updatedPrice,
+                    _id:prodID
+                }
+            });
+    }
+
+
     Product.findById(prodID).then(product=>{
         product.title=updatedTitle;
         product.description=updatedDescription;
