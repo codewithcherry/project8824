@@ -1,18 +1,40 @@
 // this file is to write the code for controller all products related functions to manioulate the data into views and models
 const Product=require("../models/product");
+const {validationResult}=require("express-validator");
 
 exports.addProductController=(req,res,next)=>{
     console.log("add product page rendered");
     res.render("admin/add-product",
         {   pagetitle:"Add Products",
             activeLink:"add-product",
-            isAuthenticated:req.session.authenticate
+            isAuthenticated:req.session.authenticate,
+            errorMessage:null,
+                oldData:{
+                    title:'',
+                    description:'',
+                    price:''
+                }
         });
 }
 
 exports.postProductController = (req, res, next) => {
     // Destructure title, description, and price from req.body
     const { title, description, price } = req.body;
+
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+      return  res.status(400).render("admin/add-product",
+            {   pagetitle:"Add Products",
+                activeLink:"add-product",
+                isAuthenticated:req.session.authenticate,
+                errorMessage:errors.array()[0].msg,
+                oldData:{
+                    title:title,
+                    description:description,
+                    price:price
+                }
+            });
+    }
 
     // Pass an object to the Product constructor
     const product = new Product({
@@ -21,6 +43,7 @@ exports.postProductController = (req, res, next) => {
         price: price,
         userId:req.user._id
     });
+   
 
     // Save the product to the database
     product.save()
