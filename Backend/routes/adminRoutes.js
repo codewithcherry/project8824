@@ -18,7 +18,13 @@ router.post("/view-products" ,isAuth,
     ] ,
     adminController.postProductController);
 
-router.post("/productslist", isAuth ,adminController.postEditProductDetails);
+router.post("/productslist", isAuth,
+    [
+        body("title").isString().isLength({min:3}).withMessage("Invalid product title please check"),
+        body('description').isString().isLength({min:50}).withMessage("Description should be atleast 50 characters"),
+        body('price').isFloat().withMessage("Enter a valid price of the product")
+    ], 
+    adminController.postEditProductDetails);
 
 router.post("/admin/delete-product", isAuth ,adminController.postDeleteProduct);
 
