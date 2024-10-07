@@ -12,6 +12,9 @@ html(lang="en")
     link(rel="stylesheet" href="/addproduct.css")
   body
     block navbar
+    if errorMessage
+            .error-message 
+                p= errorMessage
     .main-container
       .form-title-container
         h1.form-title Add Product Details
