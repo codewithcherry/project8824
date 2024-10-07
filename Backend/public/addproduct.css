@@ -84,6 +84,23 @@
   .submit-button:hover {
     background-color: rgb(85, 153, 85);
   }
+
+  .error-message{
+    display: flex;
+    justify-content: center;
+    
+  }
+
+  .error-message p{
+    width: 30rem;
+    margin: 1rem;
+    padding:0.5rem;
+    background-color: #f07979;
+    border:2px solid #cc1313;
+    border-radius: 3px;
+    text-align: center;
+    color: white;
+  }
   
   /* Responsive design */
   @media (max-width: 768px) {
@@ -101,6 +118,7 @@
       padding: 8px 15px;
     }
   }
+
   
   @media (max-width: 480px) {
     .form-title {
