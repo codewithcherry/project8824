@@ -87,6 +87,14 @@ app.use(adminRouter);
 app.use(shopRouter);
 
 
+app.use((error,req,res,next)=>{
+  console.log(error.message)
+  res.render("500",{
+        pageTitle:"500 error",
+        activeLink:"error",
+        isAuthenticated:req.session.authenticate  || false,
+    })
+});
 
 app.use(_404ErrorController.error404Controller);
 
@@ -112,6 +120,6 @@ mongoose.connect(uri).then(()=>{
     app.listen(3000);
 })
 .catch((err)=>{
-    console.log("database connection failed",err)
+  console.log(err);
 })
 
