@@ -77,7 +77,9 @@ exports.postSignup=(req,res,next)=>{
         }        
     })
     .catch(err=>{
-        console.log(err);
+        const error=new Error(err)
+        error.httpStatusCode=500
+       next(error);
     })
 }
 
@@ -128,8 +130,9 @@ exports.postLogin = (req, res, next) => {
                 });
         })
         .catch(err => {
-            console.error('Error in login process:', err);
-            res.status(500).send('Internal Server Error');
+            const error=new Error(err)
+            error.httpStatusCode=500
+            next(error);
         });
 };
 
@@ -198,7 +201,9 @@ exports.postResetPassword = (req, res, next) => {
         });
       })
       .catch(err => {
-        console.log(err);
+        const error=new Error(err)
+        error.httpStatusCode=500
+        next(error);
       });
   };
 
@@ -247,9 +252,9 @@ exports.postResetPassword = (req, res, next) => {
         res.redirect('/login');
       })
       .catch(err => {
-        console.log("Error:", err);
-        req.flash("error", "Something went wrong. Please try again later.");
-        res.redirect("/change-password");
+        const error=new Error(err)
+            error.httpStatusCode=500
+            next(error);
       });
   };
   

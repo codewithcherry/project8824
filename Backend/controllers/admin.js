@@ -51,7 +51,11 @@ exports.postProductController = (req, res, next) => {
             res.redirect('/home');
         })
         .catch(err => {
-            console.log(err);
+            const error=new Error(err)
+            console.log(error.message)
+            error.httpStatusCode=500
+            next(error);
+            
         });
 };
 
@@ -65,7 +69,9 @@ exports.getadminProductslist=(req,res,next)=>{
             });
     })
     .catch(err=>{
-        return console.log(err);
+        const error=new Error(err)
+        error.httpStatusCode=500
+        next(error);
     })
 }
 
@@ -83,6 +89,11 @@ exports.getEditProduct=(req,res,next)=>{
                     product:product,
                     isAuthenticated:req.session.authenticate
                 });
+        })
+        .catch(err=>{
+            const error=new Error(err)
+            error.httpStatusCode=500
+            next(error);
         })
         
     }
@@ -122,7 +133,9 @@ exports.postEditProductDetails=(req,res,next)=>{
         res.redirect("/productslist");
     })
     .catch(err=>{
-        console.log(err);
+        const error=new Error(err)
+        error.httpStatusCode=500
+        next(error);
     })
 }
 

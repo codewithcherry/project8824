@@ -14,7 +14,9 @@ exports.getProdducts=(req,res,next)=>{
         });
     })
     .catch(err=>{
-        return console.log(err);
+        const error=new Error(err)
+        error.httpStatusCode=500
+        next(error);
     })
    
 };
@@ -30,7 +32,9 @@ exports.getShopHome=(req,res,next)=>{
             });
     })
     .catch(err=>{
-        return console.log(err);
+        const error=new Error(err)
+            error.httpStatusCode=500
+            next(error);
     })  
 }
 
@@ -45,6 +49,11 @@ exports.getShopCart=(req,res,next)=>{
                 products:products,
                 isAuthenticated:req.session.authenticate
             });
+    })
+    .catch(err=>{
+        const error=new Error(err)
+            error.httpStatusCode=500
+            next(error);
     })
     
 }
@@ -62,7 +71,11 @@ exports.postShopCart=(req,res,next)=>{
                         console.log(p);
                         res.redirect("/cart");
                     })
-                    .catch(err=>console.log(err));
+                    .catch(err=>{
+                        const error=new Error(err)
+                        error.httpStatusCode=500
+                        next(error);
+                    });
         })
     }  
 }
@@ -73,7 +86,11 @@ exports.postDeleteCartProduct=(req,res,next)=>{
     .then(result=>{
         res.redirect("/cart")
         })
-    .catch(err=>console.log(err))
+    .catch(err=>{
+        const error=new Error(err)
+        error.httpStatusCode=500
+       next(error);
+    })
 }
 
 exports.getOrders=(req,res,next)=>{
@@ -104,7 +121,9 @@ exports.getOrders = (req, res, next) => {
             });
         })
         .catch((err) => {
-            console.log(err);
+            const error=new Error(err)
+            error.httpStatusCode=500
+            next(error);
         });
 };
 
@@ -134,6 +153,11 @@ exports.postCartToOrders=(req,res,next)=>{
     .then(()=>{
         res.redirect("/orders")
     })
+    .catch(err=>{
+                        const error=new Error(err)
+                        error.httpStatusCode=500
+                        next(error);
+    })
 
 }
 
@@ -145,6 +169,11 @@ exports.getProductDetails=(req,res,next)=>{
                 productData:product,
                 isAuthenticated:req.session.authenticate
             });
+    })
+    .catch(err=>{
+        const error=new Error(err)
+         error.httpStatusCode=500
+        next(error);
     });
     
     
