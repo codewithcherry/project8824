@@ -19,7 +19,9 @@ exports.addProductController=(req,res,next)=>{
 
 exports.postProductController = (req, res, next) => {
     // Destructure title, description, and price from req.body
-    const { title, description, price, image } = req.body;
+    const { title, description, price } = req.body;
+    const image=req.file;
+    console.log(image);
 
     const errors=validationResult(req);
     if(!errors.isEmpty()){
