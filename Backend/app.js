@@ -1,125 +1,110 @@
-// this is the root file which will executed to start the node server
-const express=require('express');
-const path=require('path');
+const express = require('express');
+const path = require('path');
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const csrfProtection = require("csurf");
+const session = require('express-session');
+const mongoStore = require("connect-mongo");
+const multer = require("multer");
+const flash = require("connect-flash");
 
+const { uri } = require("./utils/dbcredentials");
+const _404ErrorController = require("./controllers/404controller");
+const User = require("./models/users");
 
-const mongoose=require("mongoose");
-const {uri}=require("./utils/dbcredentials.js")
+// Routes
+const authRouter = require("./routes/authRouter");
+const adminRouter = require('./routes/adminRoutes');
+const shopRouter = require("./routes/shopRoutes");
 
-const bodyParser=require("body-parser");
-const _404ErrorController=require("./controllers/404controller.js")
-const User=require("./models/users.js");
-// const cookieParser=require("cookie-parser");
-const session=require('express-session');
-const mongoStore=require("connect-mongo");
+// Initialize Express App
+const app = express();
 
-const csrfProtection=require("csurf");
+// View Engine Setup
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
-const flash=require("connect-flash");
-
-const store= mongoStore.create({
-        mongoUrl: uri,  // MongoDB connection URL
-        collectionName: 'sessions',  // Collection where session data will be stored
-        ttl: 14 * 24 * 60 * 60  // Time-to-live for sessions in seconds (14 days)
-    })
-
-
-const app=express();
-
-app.set('view engine','pug');
-app.set('views',"./views");
-
-const authRouter=require("./routes/authRouter.js");
-const adminRouter=require('./routes/adminRoutes.js');
-const shopRouter=require("./routes/shopRoutes.js");
-
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(express.static(path.join(__dirname,"public")));
-
-//setup cookie parser through out the routes
-// app.use(cookieParser());
-//setup and configure session
-app.use(session(
-    {
-        secret: 'your-secret-key', // Use a strong secret in production
-        resave: false,
-        saveUninitialized: false,
-        store:store,
-        cookie:{
-            maxAge: 1000 * 60 * 60 * 24 * 14, 
-        }
-
-    }
-))
-
-app.use(csrfProtection())
-app.use(flash());
-
-// Pass CSRF token to every view (optional but recommended)
-app.use((req, res, next) => {
-  res.locals.csrfToken = req.csrfToken();  // This makes the token available in views
-  next();
+// MongoDB Session Store
+const store = mongoStore.create({
+    mongoUrl: uri,  // MongoDB connection URL
+    collectionName: 'sessions',  // Collection where session data will be stored
+    ttl: 14 * 24 * 60 * 60  // Time-to-live for sessions in seconds (14 days)
 });
 
-app.use((req, res, next) => {
-    if (req.session.user) {
-      // Fetch the full Mongoose user object from the database
-      User.findById(req.session.user._id)
-        .then(user => {
-          if (user) {
-            req.user = user;  // Attach the full user document to req.user
-          }
-          next();  // Continue to the next middleware/route handler
-        })
-        .catch(err => {
-          console.log('Error fetching user:', err);
-          next();  // Continue even if there's an error
-        });
-    } else {
-      next();  // If no session, proceed without setting req.user
+// Configure Multer for File Uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads");
+    },
+    filename: (req, file, cb) => {
+        cb(null, new Date().toISOString().replace(/:/g, '-') + "-" + file.originalname);
     }
-  });
-  
+});
 
+// Middlewares
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multer({ storage }).single('image'));
+app.use(express.static(path.join(__dirname, "public")));
 
+app.use(session({
+    secret: 'your-secret-key', // Use a strong secret in production
+    resave: false,
+    saveUninitialized: false,
+    store: store,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 14 } // 14 days
+}));
+
+app.use(csrfProtection());
+app.use(flash());
+
+// Pass CSRF token and other variables to every view
+app.use((req, res, next) => {
+    res.locals.csrfToken = req.csrfToken();
+    res.locals.isAuthenticated = req.session.authenticate || false;
+    next();
+});
+
+// Fetch user data and attach it to the req object if logged in
+app.use(async (req, res, next) => {
+    if (req.session.user) {
+        try {
+            const user = await User.findById(req.session.user._id);
+            if (user) {
+                req.user = user;  // Attach the user document to req.user
+            }
+        } catch (err) {
+            console.error('Error fetching user:', err);
+        }
+    }
+    next();  // Continue to the next middleware/route handler
+});
+
+// Routes
 app.use(authRouter);
 app.use(adminRouter);
 app.use(shopRouter);
 
-
-app.use((error,req,res,next)=>{
-  console.log(error.message)
-  res.render("500",{
-        pageTitle:"500 error",
-        activeLink:"error",
-        isAuthenticated:req.session.authenticate  || false,
-    })
-});
-
+// 404 Error Handler
 app.use(_404ErrorController.error404Controller);
 
-// mongoClientConnect(client=>{   
-//     app.listen(3000);
-// })  
+// 500 Error Handler
+app.use((error, req, res, next) => {
+    console.error(error.message);
+    res.status(500).render("500", {
+        pageTitle: "500 Error",
+        activeLink: "error",
+        isAuthenticated: req.session.authenticate || false
+    });
+});
 
-mongoose.connect(uri).then(()=>{
-    console.log("server started with mongodb connection")
-    // User.findOne().then(user=>{
-    //     if(!user){
-    //         const user=new User({
-    //             username:"demoUser",
-    //             useremail:"demo@test.com",
-    //             cart:{items:[]}
-    //         })
-    //         user.save()
-    //         .then(result=>{
-    //             console.log("user created");
-    //         });
-    //     }
-    // })
-    app.listen(3000);
-})
-.catch((err)=>{
-  console.log(err);
-})
-
+// Connect to MongoDB and start the server
+mongoose.connect(uri)
+    .then(() => {
+        console.log("Server started with MongoDB connection");
+        app.listen(3000, () => {
+            console.log('Server is running on port 3000');
+        });
+    })
+    .catch((err) => {
+        console.error('Error connecting to MongoDB:', err);
+    });
