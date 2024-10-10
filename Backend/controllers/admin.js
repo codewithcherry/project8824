@@ -19,7 +19,7 @@ exports.addProductController=(req,res,next)=>{
 
 exports.postProductController = (req, res, next) => {
     // Destructure title, description, and price from req.body
-    const { title, description, price } = req.body;
+    const { title, description, price, image } = req.body;
 
     const errors=validationResult(req);
     if(!errors.isEmpty()){
@@ -41,6 +41,7 @@ exports.postProductController = (req, res, next) => {
         title: title,         // or just 'title' in shorthand
         description: description,
         price: price,
+        image:image,
         userId:req.user._id
     });
    
