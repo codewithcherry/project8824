@@ -41,9 +41,20 @@ const storage = multer.diskStorage({
     }
 });
 
+//configure filter of types of files to be uploaded
+
+const fileFilter=(req,file,cb)=>{
+  if(file.mimetype==='image/png' || file.mimetype==='image/jpg' || file.mimetype==='image/jpeg'){
+    cb(null,true)
+  }
+  else{
+    cb(null,false)
+  }
+}
+
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(multer({ storage }).single('image'));
+app.use(multer({ storage:storage ,fileFilter:fileFilter}).single('image'));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(session({
