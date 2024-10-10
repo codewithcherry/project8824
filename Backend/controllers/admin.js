@@ -23,6 +23,16 @@ exports.postProductController = (req, res, next) => {
     const image = req.file;
     console.log(image);
 
+    if(!image){
+        return res.status(400).render("admin/add-product", {
+            pagetitle: "Add Products",
+            activeLink: "add-product",
+            isAuthenticated: req.session.authenticate,
+            errorMessage: "image is not added!",
+            oldData: { title:title, description:description, price:price }
+        });
+    }
+    const imageUrl=image.path
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).render("admin/add-product", {
@@ -35,10 +45,10 @@ exports.postProductController = (req, res, next) => {
     }
 
     const product = new Product({
-        title,
-        description,
-        price,
-        image,
+        title:title,
+        description:description,
+        price:price,
+        image:imageUrl,
         userId: req.user._id
     });
 
