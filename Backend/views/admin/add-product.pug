@@ -18,7 +18,7 @@ html(lang="en")
         h1.form-title Add Product Details
       .form-wrapper
         .form-container
-          form.product-form(action="/view-products" method="post")
+          form.product-form(action="/view-products" method="post" enctype="multipart/form-data")
             .form-item
               label(for="title") Product Title
               input#title(type="text" name="title" placeholder="Enter product title" value=oldData.title required)
