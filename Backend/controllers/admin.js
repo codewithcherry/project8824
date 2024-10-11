@@ -111,6 +111,7 @@ exports.getEditProduct = (req, res, next) => {
 exports.postEditProductDetails = (req, res, next) => {
     const prodID = req.body.productId;
     const { title: updatedTitle, description: updatedDescription, price: updatedPrice } = req.body;
+    const image=req.file;
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -128,6 +129,9 @@ exports.postEditProductDetails = (req, res, next) => {
             product.title = updatedTitle;
             product.description = updatedDescription;
             product.price = updatedPrice;
+            if(image){
+                product.image=image.path;
+            }
             return product.save();
         })
         .then(() => {
