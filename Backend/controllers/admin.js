@@ -21,7 +21,7 @@ exports.addProductController = (req, res, next) => {
 exports.postProductController = (req, res, next) => {
     const { title, description, price } = req.body;
     const image = req.file;
-    console.log(image);
+    // console.log(image);
 
     if(!image){
         return res.status(400).render("admin/add-product", {
@@ -110,7 +110,7 @@ exports.getEditProduct = (req, res, next) => {
 // Controller to handle Product Update (Edit Product)
 exports.postEditProductDetails = (req, res, next) => {
     const prodID = req.body.productId;
-    const { title: updatedTitle, description: updatedDescription, price: updatedPrice } = req.body;
+    const { title: updatedTitle, description: updatedDescription, price: updatedPrice ,imageUrl: imageUrl} = req.body;
     const image=req.file;
 
     const errors = validationResult(req);
@@ -131,6 +131,9 @@ exports.postEditProductDetails = (req, res, next) => {
             product.price = updatedPrice;
             if(image){
                 product.image=image.path;
+            }
+            else{
+                product.image=imageUrl
             }
             return product.save();
         })
