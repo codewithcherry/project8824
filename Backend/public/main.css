@@ -175,7 +175,7 @@ a.product-card:hover {
 .product-price {
   font-size: 1.4rem;
   color: #eb915d;
-  margin-bottom: 10px;
+  margin-bottom: 55px;
 }
 
 .product-rating {
@@ -184,7 +184,7 @@ a.product-card:hover {
   justify-content: center;
   align-items: baseline;
   color: #ADBBDA;
-  margin-bottom: 35px;
+  
 }
 
 .product-rating i.star {
