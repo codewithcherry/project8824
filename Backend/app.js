@@ -57,6 +57,7 @@ const fileFilter=(req,file,cb)=>{
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({ storage:storage ,fileFilter:fileFilter}).single('image'));
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/uploads',express.static(path.join(__dirname, "uploads")));
 
 app.use(session({
     secret: 'your-secret-key', // Use a strong secret in production
