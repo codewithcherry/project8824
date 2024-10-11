@@ -46,7 +46,7 @@
     padding: 20px;
   }
   
-  .product-card {
+  /* .product-card {
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 10px;
@@ -122,7 +122,108 @@
   .details-button:hover {
     background-color: #5a6268;
   }
+   */
+
+/* change in new design */
+a.product-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 280px;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+a.product-card:hover {
+  text-decoration: none;
+  transform: scale(1.03);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.product-card{
+  position: relative;
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #EDE8F5;
+}
+
+.product-info {
+  padding: 20px;
+  background-color: white;
+}
+
+.product-name {
+  color: #010413;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.product-description {
+  color: #8697C4;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.product-price {
+  font-size: 1.4rem;
+  color: #eb915d;
+  margin-bottom: 10px;
+}
+
+.product-rating {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: baseline;
+  color: #ADBBDA;
+  margin-bottom: 35px;
+}
+
+.product-rating i.star {
+  margin-right: 4px;
+  color: #F6A700; /* Star rating color */
+}
+
+.product-actions {
+  background-color: #EDE8F5;
+  padding: 15px;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
   
+}
+
+button.cart-button {
+  width: 100%;
+  padding: 8px;
+  background-color: #7091E6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button.cart-button:hover {
+  background-color: #3D52A0;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  a.product-card {
+    max-width: 100%;
+  }
+}
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .product-title {

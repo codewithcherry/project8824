@@ -8,6 +8,7 @@ html(lang="en")
     title= pageTitle
     link(rel="stylesheet" href="/navigation.css")
     link(rel="stylesheet" href="/main.css")
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
     link(rel="stylesheet" href="/modal.css")
   body
@@ -20,18 +21,20 @@ html(lang="en")
         else
           .product-grid
             each product in prods
-              .product-card
-                img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
-                .product-info
-                  h2.product-title= product.title
-                  p.product-description= product.description 
-                  h3.product-price $ #{product.price}
-                .product-actions
-                  form.cart-form(action="/cart" method="post")
-                    input(type="hidden" name="productId" value=product._id)
-                    input(type="hidden" name="_csrf" value=csrfToken)
-                    button.cart-button(type="submit") Add to Cart
-                  a.details-button(href='/product/' + product._id) Details
+                a.product-card(href='/product/' + product._id)
+                      .product-image
+                        img(src='https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg', alt='productImg')
+                      .product-info
+                        h2.product-name= product.title
+                        h3.product-price $ #{product.price}
+                        .product-rating
+                          i.star(class='fa fa-star')
+                          p.rating-text 0 ratings
+                      .product-actions
+                        form.cart-form(action="/cart" method="post")
+                          input(type="hidden" name="productId" value=product._id)
+                          input(type="hidden" name="_csrf" value=csrfToken)
+                          button.cart-button(type="submit") Add to Cart
 
     //- Modal structure for login alert
     .modal#myModal
