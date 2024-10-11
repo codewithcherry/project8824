@@ -14,7 +14,7 @@ html(lang="en")
     .container
       .product-details-container
         .product-details-card
-          img.product-image(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg", alt="product image")
+          img.product-image(src="/"+productData.image, alt="product image")
           .product-info
             h1.product-name= productData.title
             p.product-description= productData.description

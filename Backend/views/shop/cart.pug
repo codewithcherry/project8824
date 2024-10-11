@@ -20,7 +20,7 @@ html(lang="en")
               .cart-card
                 .cart-item
                   .cart-product-img
-                    img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg", alt="productImage")
+                    img(src=product.productId.image, alt="productImage")
                   .cart-product-info
                     h2.cart-item-title= product.productId.title
                     p.cart-item-price $ #{product.productId.price}

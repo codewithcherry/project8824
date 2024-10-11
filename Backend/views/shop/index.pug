@@ -23,13 +23,13 @@ html(lang="en")
             each product in prods
                 a.product-card(href='/product/' + product._id)
                       .product-image
-                        img(src='https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg', alt='productImg')
+                        img(src=product.image, alt='productImg')
                       .product-info
                         h2.product-name= product.title
-                        h3.product-price $ #{product.price}
                         .product-rating
                           i.star(class='fa fa-star')
                           p.rating-text 0 ratings
+                        h3.product-price $ #{product.price}
                       .product-actions
                         form.cart-form(action="/cart" method="post")
                           input(type="hidden" name="productId" value=product._id)

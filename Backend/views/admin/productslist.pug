@@ -19,7 +19,7 @@ html(lang="en")
           .product-grid
             each product in prods
               .product-card
-                img.product-img(src='https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg' alt="productImg")
+                img.product-img(src=product.image alt="productImg")
                 .product-info
                   h2.product-title= product.title
                   h3.product-price $ #{product.price}
