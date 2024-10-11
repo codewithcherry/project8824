@@ -48,6 +48,7 @@ const fileFilter=(req,file,cb)=>{
     cb(null,true)
   }
   else{
+    console.log("upload only png/jpg/jpeg" )
     cb(null,false)
   }
 }
