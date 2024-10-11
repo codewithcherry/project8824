@@ -1,4 +1,4 @@
-//- view all the products at admin level
+//- Admin Product List Page
 doctype html
 include ../includes/navigation.pug
 html(lang="en")
@@ -7,7 +7,6 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     title= pagetitle
     link(rel="stylesheet" href="/navigation.css")
-    //- link(rel="stylesheet" href="/main.css")
     link(rel="stylesheet" href="/adminproducts.css")
   body
     block navbar
@@ -20,10 +19,9 @@ html(lang="en")
           .product-grid
             each product in prods
               .product-card
-                img.product-img(src="https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg" alt="productImg")
+                img.product-img(src='https://www.dna-packaging.com/wp-content/uploads/2018/08/our-product-3.jpg' alt="productImg")
                 .product-info
                   h2.product-title= product.title
-                  p.product-description= product.description
                   h3.product-price $ #{product.price}
                 .product-actions
                   a.edit-btn(href="/admin/edit-product/"+product._id+"?edit=true") Edit
