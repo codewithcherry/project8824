@@ -17,7 +17,7 @@ html(lang="en")
         each order in orders
           .order-card.fade-in
             h2.order-id Order ID: ##{order._id}
-            a.invoice( href="/invoice/"+order._id) Download invoice
+            a.invoice( href="/invoice/"+order._id , target="_blank") Download invoice
             .order-items
               ul.order-list
                 each item in order.products
