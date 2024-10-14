@@ -1,6 +1,8 @@
 //- this is index for base shop view at shop level
 doctype html
 include ../includes/navigation.pug
+
+
 html(lang="en")
   head
     meta(charset="UTF-8")
@@ -11,6 +13,7 @@ html(lang="en")
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
     link(rel="stylesheet" href="/modal.css")
+    link(rel="stylesheet" href="/pagination.css")
   body
     block navbar
     .main-section
@@ -35,7 +38,7 @@ html(lang="en")
                           input(type="hidden" name="productId" value=product._id)
                           input(type="hidden" name="_csrf" value=csrfToken)
                           button.cart-button(type="submit") Add to Cart
-
+    include ../includes/pagination.pug
     //- Modal structure for login alert
     .modal#myModal
       .modal-content
