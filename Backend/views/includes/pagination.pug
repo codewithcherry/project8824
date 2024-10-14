@@ -1,0 +1,17 @@
+block pagination 
+    div.pagination
+        //- Previous Page Link
+        if pagination.hasPrevPage
+            a(href=`?page=${pagination.prevPage}`) #{pagination.prevPage}
+        else
+            if pagination.prevPage!=0
+                span.disabled #{pagination.prevPage}
+
+        //- Current Page Indicator
+        span.page-info  #{pagination.currentPage}
+
+        //- Next Page Link
+        if pagination.hasNextPage 
+            a(href=`?page=${pagination.nextPage}`) #{pagination.nextPage}
+        else
+            span.disabled #{pagination.nextPage}

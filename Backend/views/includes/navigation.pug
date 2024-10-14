@@ -1,7 +1,8 @@
 block navbar
   .navbar
     .navbar-container
-      .navbar-title My Shop App
+      .navbar-title 
+        a.title(href="/") My Shop App
       .menu-icon
         span
         span
@@ -10,7 +11,7 @@ block navbar
         //- li.nav-item
         //-   a.nav-link(href="/home" class=activeLink === 'home' ? 'active' : '') Home
         li.nav-item
-          a.nav-link(href="/view-products" class=activeLink === 'view-products' ? 'active' : '') Products
+          a.nav-link(href="/view-products" class=activeLink === 'view-products' ? 'active' : '') Home
         if isAuthenticated
           li.nav-item
             a.nav-link(href="/cart" class=activeLink === 'cart' ? 'active' : '') Cart
