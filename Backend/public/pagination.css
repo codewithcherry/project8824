@@ -1,0 +1,44 @@
+/* pagination.css */
+
+.pagination {
+    display: flex;
+    justify-content: center; /* Center the pagination */
+    align-items: center;
+    margin: 20px 0; /* Space above and below pagination */
+}
+
+.pagination a {
+    padding: 10px 15px;
+    margin: 0 5px; /* Space between buttons */
+    text-decoration: none;
+    font-weight: 500;
+    border:2px solid #007BFF;
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.pagination a:hover {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination span {
+    padding: 10px 15px; /* Same padding as links */
+    margin: 0 5px; /* Space between buttons */
+    
+}
+
+.pagination span.disabled {
+    background-color: #ccc; /* Gray background for disabled state */
+    color: #110d0d; /* Darker text color for disabled state */
+    pointer-events: none; /* Disable pointer events on disabled span */
+}
+
+.page-info {
+    margin: 0 10px; /* Space around page info */
+    font-weight: bold; /* Bold text for the current page */
+    border-bottom: 3px solid #3087eb; /* Primary button color */
+    border-radius: 0;
+    color: rgb(12, 11, 11); /* Text color */
+}

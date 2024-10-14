@@ -32,6 +32,11 @@ body {
   color: white;
 }
 
+.navbar-title a.title{
+  text-decoration: none;
+  color: white;
+}
+
 .menu-icon {
   display: none;
   flex-direction: column;
