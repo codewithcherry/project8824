@@ -1,5 +1,6 @@
 const Product=require("../models/product");
 const Order=require("../models/orders");
+const GenerateInvoice=require("../middlewares/invoice");
 
 const User=require("../models/users");
 
@@ -191,6 +192,7 @@ exports.getInvoice=(req,res,next)=>{
             return console.log("you cannot print other orders")
         }
         //code for pdf generation helper function
+        return GenerateInvoice(order,res);
     })
     .catch(err=>{
         next(err);
