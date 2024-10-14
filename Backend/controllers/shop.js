@@ -6,13 +6,32 @@ const User=require("../models/users");
 
 exports.getProdducts=(req,res,next)=>{
     console.log("view products page rendered");
-    Product.find().then((products)=>{
-        return  res.render('shop/index',{
-            pagetitle:"View Products",
-            activeLink:"view-products",
-            prods:products,
-            isAuthenticated:req.session.authenticate
-        });
+    const page=Number(req.query.page) || 1;
+    const pageLimit=8;
+    let NoProducts;
+    Product.find()
+    .countDocuments()
+    .then(totalProducts=>{
+            NoProducts=totalProducts;
+            Product.find()
+            .skip((page-1)*pageLimit)
+            .limit(pageLimit)
+            .then((products)=>{
+                return  res.render('shop/index',{
+                    pagetitle:"View Products",
+                    activeLink:"view-products",
+                    prods:products,
+                    isAuthenticated:req.session.authenticate,
+                    pagination:{
+                        currentPage:page,
+                        nextPage:+page+1,
+                        prevPage:+page-1,
+                        hasNextPage:page*pageLimit<totalProducts,
+                        hasPrevPage:page>1
+                    }
+                });
+            })
+
     })
     .catch(err=>{
         const error=new Error(err)
@@ -24,19 +43,38 @@ exports.getProdducts=(req,res,next)=>{
 
 exports.getShopHome=(req,res,next)=>{
     console.log("shop home page rendered");
-    Product.find().then((products)=>{
-        return  res.render('shop/index',
-            {pagetitle:"View Products",
-                activeLink:"home",
-                prods:products,
-                isAuthenticated:req.session.authenticate
-            });
+    const page=Number(req.query.page) || 1;
+    const pageLimit=8;
+    let NoProducts;
+    Product.find()
+    .countDocuments()
+    .then(totalProducts=>{
+            NoProducts=totalProducts;
+            Product.find()
+            .skip((page-1)*pageLimit)
+            .limit(pageLimit)
+            .then((products)=>{
+                return  res.render('shop/index',{
+                    pagetitle:"View Products",
+                    activeLink:"view-products",
+                    prods:products,
+                    isAuthenticated:req.session.authenticate,
+                    pagination:{
+                        currentPage:page,
+                        nextPage:+page+1,
+                        prevPage:+page-1,
+                        hasNextPage:page*pageLimit<totalProducts,
+                        hasPrevPage:page>1
+                    }
+                });
+            })
+
     })
     .catch(err=>{
         const error=new Error(err)
-            error.httpStatusCode=500
-            next(error);
-    })  
+        error.httpStatusCode=500
+        next(error);
+    })
 }
 
 exports.getShopCart=(req,res,next)=>{
@@ -187,7 +225,7 @@ exports.getInvoice=(req,res,next)=>{
     return Order
     .findOne({_id:orderId})
     .then(order=>{
-        console.log(order);
+        // console.log(order);
         if(order.user.userId.toString()!==req.user._id.toString()){
             return console.log("you cannot print other orders")
         }
