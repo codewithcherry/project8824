@@ -12,6 +12,10 @@ const orderSchema=new Schema({
         name:{
             type:String,
             required:true
+        },
+        email:{
+            type:String,
+            required:true
         }
     },
     products:[
@@ -25,7 +29,11 @@ const orderSchema=new Schema({
                 required:true
             }
         }
-    ]
+    ],
+    time:{
+        type:Date,
+        required:true
+    }
 })
 
 const Order=mongoose.model("Order",orderSchema);

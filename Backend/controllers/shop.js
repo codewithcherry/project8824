@@ -142,9 +142,11 @@ exports.postCartToOrders=(req,res,next)=>{
             const order=new Order({
                 user:{
                     userId:req.user._id,
-                    name:req.user.username
+                    name:req.user.username,
+                    email:req.user.useremail
                 },
-                products:products
+                products:products,
+                time:new Date()
             })
             return order.save();
     }).then(()=>{
