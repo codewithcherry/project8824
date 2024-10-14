@@ -178,3 +178,19 @@ exports.getProductDetails=(req,res,next)=>{
     
     
 }
+
+exports.getInvoice=(req,res,next)=>{
+    const orderId=req.params.orderId;
+    return Order
+    .findOne({_id:orderId})
+    .then(order=>{
+        console.log(order);
+        if(order.user.userId.toString()!==req.user._id.toString()){
+            return console.log("you cannot print other orders")
+        }
+        //code for pdf generation helper function
+    })
+    .catch(err=>{
+        next(err);
+    })
+}
