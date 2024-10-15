@@ -243,3 +243,17 @@ exports.getInvoice=(req,res,next)=>{
         next(err);
     })
 }
+
+exports.getCheckout=(req,res,next)=>{
+    res.render('shop/checkout',{
+        pagetitle:"Add Address",
+        activeLink:"checkout",
+        isAuthenticated:req.session.authenticate,
+        status:{
+            productsAdded:true,
+            addressAdded:false,
+            payment:false,
+            success:false
+        }
+    });
+}
