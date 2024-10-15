@@ -245,15 +245,22 @@ exports.getInvoice=(req,res,next)=>{
 }
 
 exports.getCheckout=(req,res,next)=>{
-    res.render('shop/checkout',{
-        pagetitle:"Add Address",
-        activeLink:"checkout",
-        isAuthenticated:req.session.authenticate,
-        status:{
-            productsAdded:true,
-            addressAdded:false,
-            payment:false,
-            success:false
-        }
-    });
+    User.findOne({_id:req.user._id})
+    .then(user=>{
+        return res.render('shop/checkout',{
+            pagetitle:"Add Address",
+            activeLink:"checkout",
+            isAuthenticated:req.session.authenticate,
+            status:{
+                productsAdded:true,
+                addressAdded:false,
+                payment:false,
+                success:false
+            },
+            addressArray:user.address
+        });
+    })
+    .catch(err=>{
+        next(err);
+    })
 }
