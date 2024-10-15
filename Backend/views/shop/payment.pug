@@ -1,0 +1,12 @@
+doctype html
+include ../includes/navigation.pug
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title= pageTitle
+    link(rel="stylesheet" href="/navigation.css") 
+    link(rel="stylesheet" href="/status-tracker.css")
+  body
+    block navbar
+    include ../shop/cartStatus.pug

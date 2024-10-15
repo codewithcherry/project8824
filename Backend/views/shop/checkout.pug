@@ -18,7 +18,7 @@ html(lang="en")
         .content-box 
             .form-container
                 h2 Shipping Information
-                form(action="/place-order" method="POST" class="add-form")
+                form(action="/payment" method="POST" class="add-form")
                     .form-group
                         label(for="name") Full Name:
                         input(type="text" name="name" id="name" required placeholder="Enter your full name")
@@ -57,13 +57,32 @@ html(lang="en")
                         .address-list
                             each address in addressArray
                                 .address-card
-                                    p Full Name: #{address.fullname}
-                                    p Area: #{address.area}
-                                    p City: #{address.city}
-                                    p Postal Code: #{address.postalCode}
-                                    p Country: #{address.country}
-                                    p Phone: #{address.phone}
-                                    p Alternate Phone: #{address.altPhone}
+                                    .address-field
+                                        p Full Name: 
+                                        span #{address.fullname}
+                                    .address-field
+                                        p Area:
+                                        span #{address.area}
+                                    .address-field
+                                        p City:
+                                        span #{address.city}
+                                    .address-field
+                                        p Postal Code:
+                                        span #{address.postalCode}
+                                    .address-field
+                                        p Country:
+                                        span #{address.country}
+                                    .address-field
+                                        p Phone:
+                                        span #{address.phone}
+                                    .address-field
+                                        p Alternate Phone:
+                                        span #{address.altPhone}
+                                    form(action="/payment" method="post")
+                                        input(type="hidden" name='ship-address' value=address._id) 
+                                        input(type="hidden" name="_csrf" value=csrfToken)
+                                        button(type="submit") select
+
                     else
                         p No addresses added.
                     
