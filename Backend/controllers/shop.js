@@ -86,7 +86,7 @@ exports.getShopCart=(req,res,next)=>{
             {   pageTitle:"my cart",
                 activeLink:"cart",
                 products:products,
-                isAuthenticated:req.session.authenticate
+                isAuthenticated:req.session.authenticate     
             });
     })
     .catch(err=>{
