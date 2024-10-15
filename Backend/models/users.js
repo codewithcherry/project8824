@@ -28,6 +28,43 @@ const userSchema=new Schema({
         }]
 
     },
+    address:[
+        {
+            fullname: {
+                type: String,
+                 // Ensure this field is required
+            },
+            area: {
+                type: String,
+                // Ensure this field is required
+            },
+            city: {
+                type: String,
+                 // Ensure this field is required
+            },
+            postalCode: {
+                type: String,
+               // Ensure this field is required
+            },
+            country: {
+                type: String,
+              
+            },
+            phone: {
+                type: String,
+                
+            },
+            altPhone: {
+                type: String,
+                required: false, // This field is optional
+            },
+            contactType: {
+                type: String,
+                enum: ['work', 'home', 'other'], // Limited to specified values
+               
+            },
+        }
+    ],
     resetToken:{
         type:String
     },
