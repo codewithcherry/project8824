@@ -130,6 +130,7 @@
   .checkout-btn {
     padding: 12px 25px;
     background-color: #4caf50;
+    text-decoration: none;
     color: white;
     border: none;
     border-radius: 5px;
