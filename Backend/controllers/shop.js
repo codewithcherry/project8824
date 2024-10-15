@@ -79,14 +79,21 @@ exports.getShopHome=(req,res,next)=>{
 
 exports.getShopCart=(req,res,next)=>{
     console.log("Cart page is rendered"); 
+    let total=0;
     req.user.populate("cart.items.productId")
     .then(user=>{
         const products=user.cart.items;
+        products.forEach(p => {
+            total+=p.productId.price*p.quantity
+        });
         res.render('shop/cart',
             {   pageTitle:"my cart",
                 activeLink:"cart",
                 products:products,
-                isAuthenticated:req.session.authenticate     
+                isAuthenticated:req.session.authenticate,
+                total:total,
+                tax:Math.ceil((total*4)/100),
+                delivery:total>200?0:49.00     
             });
     })
     .catch(err=>{

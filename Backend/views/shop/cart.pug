@@ -33,13 +33,13 @@ html(lang="en")
             .cart-summary
               .summary-box
                 p Total: 
-                  span.cart-total $00
-                p Tax: 
-                  span.cart-tax $0
-                p Delivery: 
-                  span.cart-delivery $0
+                  span.cart-total #{total}
+                p Tax:(4%) 
+                  span.cart-tax #{tax}
+                p Delivery: (no delivery charges for orders above 200$)
+                  span.cart-delivery #{delivery}
                 p Final Amount: 
-                  span.cart-final $00
+                  span.cart-final #{total+tax+delivery}
               .checkout-container
                 form(action="/orders", method="post")
                   input(type="hidden" name="_csrf" value=csrfToken)
