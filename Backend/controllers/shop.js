@@ -264,3 +264,21 @@ exports.getCheckout=(req,res,next)=>{
         next(err);
     })
 }
+
+exports.postPayment=(req,res,next)=>{
+    const shipAddressId=req.body['ship-address'];
+
+    res.render('shop/payment',{
+        pagetitle:"payment",
+        activeLink:"payment",
+        isAuthenticated:req.session.authenticate,
+        status:{
+            productsAdded:true,
+            addressAdded:true,
+            payment:false,
+            success:false
+        }
+        
+    });
+    
+}
