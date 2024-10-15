@@ -14,39 +14,56 @@ html(lang="en")
   body
     block navbar
     include ../shop/cartStatus.pug
-    .content-box 
-        .form-container
-            h2 Shipping Information
-            form(action="/place-order" method="POST" class="add-form")
-                .form-group
-                    label(for="name") Full Name:
-                    input(type="text" name="name" id="name" required placeholder="Enter your full name")
-                .form-group
-                    label(for="address") Address:
-                    input(type="text" name="address" id="address" required placeholder="Enter your address")
-                .form-group
-                    label(for="city") City:
-                    input(type="text" name="city" id="city" required placeholder="Enter your city")
-                .form-group
-                    label(for="postalCode") Postal Code:
-                    input(type="text" name="postalCode" id="postalCode" required placeholder="Enter your postal code")
-                .form-group
-                    label(for="country") Country:
-                    input(type="text" name="country" id="country" required placeholder="Enter your country")
-                .form-group
-                    label(for="phone") Phone Number:
-                    input(type="text" name="phone" id="phone" required placeholder="Enter your phone number")
-                .form-group
-                    label(for="altPhone") Alternative Number:
-                    input(type="text" name="altPhone" id="altPhone" placeholder="Enter an alternative number (optional)")
-                .form-group
-                    label Contact Type:
-                    div.radio-group
-                        label Work
-                            input(type="radio" name="contactType" value="work" required) 
-                        label Home
-                            input(type="radio" name="contactType" value="home")
-                        label other
-                            input(type="radio" name="contactType" value="other") 
-                input(type="hidden" name="_csrf" value=csrfToken)
-                button(type="submit") Submit 
+    .checkout-container
+        .content-box 
+            .form-container
+                h2 Shipping Information
+                form(action="/place-order" method="POST" class="add-form")
+                    .form-group
+                        label(for="name") Full Name:
+                        input(type="text" name="name" id="name" required placeholder="Enter your full name")
+                    .form-group
+                        label(for="address") Street/Area:
+                        input(type="text" name="area" id="area" required placeholder="Enter your street/area/H.no")
+                    .form-group
+                        label(for="city") City:
+                        input(type="text" name="city" id="city" required placeholder="Enter your city")
+                    .form-group
+                        label(for="postalCode") Postal Code:
+                        input(type="text" name="postalCode" id="postalCode" required placeholder="Enter your postal code")
+                    .form-group
+                        label(for="country") Country:
+                        input(type="text" name="country" id="country" required placeholder="Enter your country")
+                    .form-group
+                        label(for="phone") Phone Number:
+                        input(type="text" name="phone" id="phone" required placeholder="Enter your phone number")
+                    .form-group
+                        label(for="altPhone") Alternative Number:
+                        input(type="text" name="altPhone" id="altPhone" placeholder="Enter an alternative number (optional)")
+                    .form-group
+                        label Contact Type:
+                        div.radio-group
+                            label Work
+                                input(type="radio" name="contactType" value="work" required) 
+                            label Home
+                                input(type="radio" name="contactType" value="home")
+                            label other
+                                input(type="radio" name="contactType" value="other") 
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    button(type="submit") Submit 
+        .address-box 
+                    h1 Address list
+                    if addressArray.length > 0
+                        .address-list
+                            each address in addressArray
+                                .address-card
+                                    p Full Name: #{address.fullname}
+                                    p Area: #{address.area}
+                                    p City: #{address.city}
+                                    p Postal Code: #{address.postalCode}
+                                    p Country: #{address.country}
+                                    p Phone: #{address.phone}
+                                    p Alternate Phone: #{address.altPhone}
+                    else
+                        p No addresses added.
+                    
