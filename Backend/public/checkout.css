@@ -1,10 +1,5 @@
 /* styles.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    margin: 0;
-    padding: 20px;
-  }
+
 
   .checkout-container{
     display:flex;
@@ -78,6 +73,7 @@ body {
   }
   
   button[type="submit"] {
+    max-width: 150px;
     background-color: #28a745;
     color: white;
     border: none;
@@ -116,8 +112,9 @@ body {
   }
   
   .address-card {
+    position: relative;
     border: 2px solid #ddd;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 15px;
     margin: 10px 0;   
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -127,13 +124,38 @@ body {
   .address-card:hover {
     cursor: pointer;
     background: #ffffff;
-    transform: scale(1.03);
+    transform: scale(1.01);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
-  
-  .add-address-button {
-    display: inline-block;
+
+  .address-field{
+    display: flex;
+    gap:10px;
+    align-items: center;
+  }
+
+  .address-card p{
+    font-weight: 600;
+    margin:10px 0px;
+  }
+  .address-card span{
+    font-weight: 500;
+    color: #494949;
+    border:2px solid #676969;
+    border-radius: 5px;
+    padding: 5px;
+    
+  }
+  .address-card form{
     margin-top: 20px;
+    position: absolute;
+    bottom:10px;
+    right:20px;
+  }
+  
+  .selectBtn{
+    width: 150px;
+    margin: auto;
     padding: 10px 20px;
     background: #007bff;
     color: white;
