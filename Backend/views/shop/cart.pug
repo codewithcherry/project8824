@@ -41,8 +41,9 @@ html(lang="en")
                 p Final Amount: 
                   span.cart-final #{total+tax+delivery}
               .checkout-container
-                form(action="/orders", method="post")
-                  input(type="hidden" name="_csrf" value=csrfToken)
-                  button.checkout-btn(type="submit") Checkout
+                //- form(action="/checkout", method="get")
+                //-   //- input(type="hidden" name="_csrf" value=csrfToken)
+                //-   button.checkout-btn(type="submit") Checkout
+                a.checkout-btn(href="/checkout") checkout
           else
             p.cart-empty No products in your cart
