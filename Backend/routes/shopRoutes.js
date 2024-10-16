@@ -31,7 +31,7 @@ router.post("/cart-remove-product", isAuth, shopController.postDeleteCartProduct
 router.get('/checkout',isAuth,shopController.getCheckout);
 
 router.post("/payment",isAuth,shopController.postPayment);
-router.post("/orders", isAuth, shopController.postCartToOrders);
+router.post("/orders", isAuth, shopController.postOrders);
 router.get('/orders', isAuth, shopController.getOrders);
 
 router.get("/invoice/:orderId",isAuth,shopController.getInvoice);
