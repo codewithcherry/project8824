@@ -7,6 +7,69 @@ html(lang="en")
     title= pageTitle
     link(rel="stylesheet" href="/navigation.css") 
     link(rel="stylesheet" href="/status-tracker.css")
+    link(rel="stylesheet" href="/payments.css")
   body
     block navbar
     include ../shop/cartStatus.pug
+    .payment-container 
+      .products-container
+        h2 Products
+        .cart-content
+          if products && products.length
+            each product in products
+              .cart-card
+                .cart-item
+                  .cart-product-img
+                    img(src=product.productId.image, alt="productImage")
+                  .cart-product-info
+                    h2.cart-item-title= product.productId.title
+                    p.cart-item-price $ #{product.productId.price}
+                    p.cart-item-qty Quantity: 
+                      span= product.quantity
+      .shipping-container 
+        h2 Shipping address
+        .shipping-box 
+          .address-card
+              .address-field
+                  p Full Name: 
+                  span #{address.fullname}
+              .address-field
+                  p Area:
+                  span #{address.area}
+              .address-field
+                  p City:
+                  span #{address.city}
+              .address-field
+                  p Postal Code:
+                  span #{address.postalCode}
+              .address-field
+                  p Country:
+                  span #{address.country}
+              .address-field
+                  p Phone:
+                  span #{address.phone}
+              .address-field
+                  p Alternate Phone:
+                  span #{address.altPhone}
+      .cart-summary-container
+        h2 Cart Summary
+        .summary-details
+            .summary-item
+                p Subtotal:
+                span #{subtotal}$
+            .summary-item
+                p Tax (4%):
+                span #{tax}$
+            .summary-item
+                p Delivery Charges:
+                span #{delivery}$
+            .summary-item.total
+                p Total Amount:
+                span #{subtotal+tax+delivery}$
+        form(action="/orders" method="POST")
+            input(type="hidden" name="shipTo" value=address)
+            input(type="hidden" name="payment" value={subtotal:subtotal,tax:tax,delivery:delivery,total:subtotal+tax+delivery})
+            input(type="hidden" name="_csrf" value=csrfToken)
+            button(type="submit") Pay Now
+        .note
+            p *Orders above $199 get free delivery!*

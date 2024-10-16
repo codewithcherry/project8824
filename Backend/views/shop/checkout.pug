@@ -79,7 +79,7 @@ html(lang="en")
                                         p Alternate Phone:
                                         span #{address.altPhone}
                                     form(action="/payment" method="post")
-                                        input(type="hidden" name='ship-address' value=address._id) 
+                                        input(type="hidden" name='ship-address' value=address) 
                                         input(type="hidden" name="_csrf" value=csrfToken)
                                         button(type="submit") select
 
