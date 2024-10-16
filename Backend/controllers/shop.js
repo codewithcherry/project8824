@@ -175,9 +175,12 @@ exports.getOrders = (req, res, next) => {
 
 
 
-exports.postCartToOrders=(req,res,next)=>{
+exports.postOrders=(req,res,next)=>{
     console.log("checkoutpage after posting from cart");
-
+    const shipTo=JSON.parse(req.body.shipTo);
+    const paymentDetails=JSON.parse(req.body.payment);
+    // console.log(shipTo)
+    // console.log(paymentDetails)
     req.user.populate("cart.items.productId").then((user)=>{
         const products = user.cart.items.map((item) => {
             return {
@@ -192,6 +195,8 @@ exports.postCartToOrders=(req,res,next)=>{
                     email:req.user.useremail
                 },
                 products:products,
+                shipTo:shipTo,
+                payment:paymentDetails,
                 time:new Date()
             })
             return order.save();
@@ -266,19 +271,40 @@ exports.getCheckout=(req,res,next)=>{
 }
 
 exports.postPayment=(req,res,next)=>{
-    const shipAddressId=req.body['ship-address'];
+    const shipAddress=JSON.parse(req.body['ship-address']);
+    // console.log(shipAddress)
+    let total=0;
+    req.user.populate("cart.items.productId")
+    .then(user=>{
+        const products=user.cart.items;
+        products.forEach(p => {
+            total+=p.productId.price*p.quantity
+        });
+        res.render('shop/payment',{
+            pagetitle:"payment",
+            activeLink:"payment",
+            products:products,
+            isAuthenticated:req.session.authenticate,
+            address:shipAddress,
+            subtotal:total,
+            tax:Math.ceil((total*4)/100),
+            delivery:total>200?0:49.00 ,
+            status:{
+                productsAdded:true,
+                addressAdded:true,
+                payment:false,
+                success:false
+            }
+            
+        });
+    })
+    .catch(err=>{
+        const error=new Error(err)
+            error.httpStatusCode=500
+            next(error);
+    })
 
-    res.render('shop/payment',{
-        pagetitle:"payment",
-        activeLink:"payment",
-        isAuthenticated:req.session.authenticate,
-        status:{
-            productsAdded:true,
-            addressAdded:true,
-            payment:false,
-            success:false
-        }
-        
-    });
+
+    
     
 }
