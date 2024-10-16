@@ -18,10 +18,10 @@ html(lang="en")
         .content-box 
             .form-container
                 h2 Shipping Information
-                form(action="/payment" method="POST" class="add-form")
+                form(action="/add-address" method="POST" class="add-form")
                     .form-group
                         label(for="name") Full Name:
-                        input(type="text" name="name" id="name" required placeholder="Enter your full name")
+                        input(type="text" name="fullname" id="name" required placeholder="Enter your full name")
                     .form-group
                         label(for="address") Street/Area:
                         input(type="text" name="area" id="area" required placeholder="Enter your street/area/H.no")
