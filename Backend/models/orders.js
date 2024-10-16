@@ -30,6 +30,14 @@ const orderSchema=new Schema({
             }
         }
     ],
+    shipTo:{
+        type:Object,
+        required:true
+    },
+    payment:{
+        type:Object,
+        required:true
+    },
     time:{
         type:Date,
         required:true
