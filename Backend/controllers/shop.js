@@ -303,8 +303,32 @@ exports.postPayment=(req,res,next)=>{
             error.httpStatusCode=500
             next(error);
     })
+   
+}
 
+exports.postAddAddress=(req,res,next)=>{
+    const shipAddress= {
+        fullname:req.body.fullname,
+        area:req.body.area,
+        city:req.body.city,
+        postalCode:req.body.postalCode,
+        country:req.body.country,
+        phone:req.body.phone,
+        altPhone:req.body.altPhone,
+        contactType:req.body.contactType
+    } 
+    // console.log(shipAddress)
 
-    
-    
+    User.findOne({_id:req.user._id})
+    .then(user=>{
+        const updatedAddress=[...user.address,shipAddress]
+        user.address=updatedAddress
+        return user.save()
+    })
+    .then(result=>{
+        res.redirect("/checkout");
+    })
+    .catch(err=>{
+        next(err);
+    })
 }
