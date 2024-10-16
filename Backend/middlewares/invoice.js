@@ -41,12 +41,12 @@ GenerateInvoice = (order, res) => {
    
   
     // Bill to Section
-    doc.fontSize(12).text('BILL TO', 50, 150);
+    doc.fontSize(12).text('SHIP TO', 50, 150);
     doc.fontSize(10).text(order.user.name, 50, 170);
-    doc.text('[Company Name]', 50, 185);
-    doc.text('[Street Address]', 50, 200);
-    doc.text('[City, ST ZIP]', 50, 215);
-    doc.text('[Phone]', 50, 230);
+    doc.text(order.shipTo.area, 50, 185);
+    doc.text(order.shipTo.city +","+ order.shipTo.country, 50, 200);
+    doc.text("postal code:"+order.shipTo.postalCode, 50, 215);
+    doc.text(order.shipTo.phone, 50, 230);
     doc.text(order.user.email, 50, 245);
   
     // Add a line to separate sections
@@ -78,15 +78,19 @@ GenerateInvoice = (order, res) => {
   
     y += 25;
     doc.fontSize(10).text('SUBTOTAL', 370, y);
-    doc.text(totalAmount, 450, y);
+    doc.text("$ "+order.payment.subtotal, 450, y);
   
     y += 15;
     doc.text('TAX', 370, y);
-    doc.text('0.00', 450, y);
+    doc.text("$ "+order.payment.tax, 450, y);
+
+    y += 15;
+    doc.text('DELIVERY', 370, y);
+    doc.text("$ "+order.payment.delivery, 450, y);
   
     y += 15;
     doc.fontSize(12).text('TOTAL', 370, y);
-    doc.text(totalAmount, 450, y);
+    doc.text("$ "+order.payment.total , 450, y);
   
     // Add "Thank you" note
     doc.moveDown(2);
